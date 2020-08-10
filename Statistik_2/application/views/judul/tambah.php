@@ -11,7 +11,7 @@
 <div class="container m-3">
   <div class="form-group">
     <label for="">Judul</label>
-    <input type="text" class="form-control" name="judul_nm" aria-describedby="emailHelp">
+    <input type="text" class="form-control" name="judul_nm">
   </div>
   <button type="submit" class="btn btn-primary" value="Save">Submit</button>
 </div>
