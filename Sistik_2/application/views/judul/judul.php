@@ -31,9 +31,7 @@
 						<td><?= $data['judul_nm']; ?></td>
 						<td>
 							<a href="<?php echo site_url('judul/edit/' . $data['judul_id']) ?>">Edit</a> |
-
 							<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('judul/hapus/' . $data['judul_id']) ?>">Hapus</a>
-							<!-- <a href="<?php echo site_url('judul/hapus/' . $data['judul_id']) ?>">Hapus</a> -->
 						</td>
 					</tr>
 				<?php endforeach ?>
