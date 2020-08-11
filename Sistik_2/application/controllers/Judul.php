@@ -14,8 +14,7 @@ class Judul extends CI_Controller {
     public function index()
     {
 		$data['judul'] = $this->judul_model->getAll();
-		print_r($data);
-        // $this->load->view('judul/judul', $data);
+        $this->load->view('judul/judul', $data);
     }
 
     public function tambah()
