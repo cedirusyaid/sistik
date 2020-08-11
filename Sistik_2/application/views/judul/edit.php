@@ -9,16 +9,18 @@
 </head>
 
 <body>
-	<form action="" method="post">
-		<div class="container m-3">
-			<input type="hidden" value="<?= $judul->judul_id ?>" name="id">
-			<div class="form-group">
-				<label for="">Judul</label>
-				<input type="text" class="form-control" name="judul_nm" value="<?= $judul->judul_nm ?>">
+	<div class="container">
+		<form action="" method="post">
+			<div class="container m-3">
+				<input type="hidden" value="<?= $judul->judul_id ?>" name="id">
+				<div class="form-group">
+					<label for="">Judul</label>
+					<input type="text" class="form-control" name="judul_nm" value="<?= $judul->judul_nm ?>">
+				</div>
+				<button type="submit" class="btn btn-primary" value="Update">Submit</button>
 			</div>
-			<button type="submit" class="btn btn-primary" value="Update">Submit</button>
-		</div>
-	</form>
+		</form>
+	</div>
 </body>
 
 </html>

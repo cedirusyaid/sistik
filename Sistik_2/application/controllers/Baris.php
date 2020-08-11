@@ -1,8 +1,7 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Baris extends CI_Controller
-{
+class Baris extends CI_Controller {
 
 	public function __construct()
 	{
@@ -13,6 +12,6 @@ class Baris extends CI_Controller
 	public function index()
 	{
 		$data['statistik'] = $this->Statistik_model->baris();
-		$this->load->view('statistik_view', $data);
+		$this->load->view('statistik_view',$data);
 	}
 }

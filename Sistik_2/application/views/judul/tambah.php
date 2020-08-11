@@ -9,15 +9,17 @@
 </head>
 
 <body>
-	<form action="<?php echo site_url('judul/tambah') ?>" method="post">
-		<div class="container m-3">
-			<div class="form-group">
-				<label for="">Judul</label>
-				<input type="text" class="form-control" name="judul_nm">
+	<div class="container">
+		<form action="<?php echo site_url('judul/tambah') ?>" method="post">
+			<div class="container m-3">
+				<div class="form-group">
+					<label for="">Judul</label>
+					<input type="text" class="form-control" name="judul_nm">
+				</div>
+				<button type="submit" class="btn btn-primary" value="Save">Submit</button>
 			</div>
-			<button type="submit" class="btn btn-primary" value="Save">Submit</button>
-		</div>
-	</form>
+		</form>
+	</div>
 </body>
 
 </html>
