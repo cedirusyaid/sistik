@@ -18,6 +18,6 @@ class Api extends CI_Controller
 		$data_array = array(
 			'datalist' => $data
 		);
-		$this->load->view('judul/tambah', $data_array);
+		$this->load->view('tabel/add', $data_array);
 	}
 }

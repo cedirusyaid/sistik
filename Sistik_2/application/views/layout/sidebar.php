@@ -23,9 +23,9 @@
  					</a>
  					<ul class="nav nav-treeview">
  						<li class="nav-item">
- 							<a href="<?= base_url('judul'); ?>" class="nav-link active">
+ 							<a href="<?= base_url('tabel/index'); ?>" class="nav-link active">
  								<i class="far fa-circle nav-icon"></i>
- 								<p>Judul</p>
+ 								<p>Tabel</p>
  							</a>
  						</li>
  						<li class="nav-item">

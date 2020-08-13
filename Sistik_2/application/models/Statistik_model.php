@@ -13,7 +13,7 @@ class Statistik_model extends CI_Model
 		// $this->load->view('welcome_message');
 	}
 
-	public function judul()
+	public function tabel()
 	{
 
 		$hasil = $this->db->get('tabel_data');

@@ -69,13 +69,13 @@ CREATE TABLE `tabel_data` (
 --
 
 INSERT INTO `tabel_data` (`tabel_id`, `tabel_nm`) VALUES
-(1, 'Judul Dua'),
-(2, 'Judul Sepuluh'),
-(3, 'Judul Sebelas'),
-(4, 'Judul Empat'),
-(5, 'Judul Lima'),
-(6, 'Judul Lima'),
-(7, 'Judul Enam');
+(1, 'tabel Dua'),
+(2, 'tabel Sepuluh'),
+(3, 'tabel Sebelas'),
+(4, 'tabel Empat'),
+(5, 'tabel Lima'),
+(6, 'tabel Lima'),
+(7, 'tabel Enam');
 
 -- --------------------------------------------------------
 

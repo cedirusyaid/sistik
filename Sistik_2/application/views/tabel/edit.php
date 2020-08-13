@@ -39,11 +39,11 @@ $this->load->view('layout/sidebar.php');
 						<!-- form start -->
 						<form class="form-horizontal" method="POST">
 							<div class="card-body">
-								<input type="hidden" name="id" value="<?= $judul->tabel_id; ?>">
+								<input type="hidden" name="id" value="<?= $tabel->tabel_id; ?>">
 								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Judul</label>
+									<label class="col-sm-2 col-form-label">Tabel</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="tabel_nm" value="<?= $judul->tabel_nm; ?>">
+										<input type="text" class="form-control" name="tabel_nm" value="<?= $tabel->tabel_nm; ?>">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -57,7 +57,7 @@ $this->load->view('layout/sidebar.php');
 								</div>
 							</div> <!-- /.card-body -->
 							<div class="card-footer">
-								<button type="submit" class="btn btn-info text-white">Kirim</button>
+								<button type="submit" class="btn btn-info text-white">Save</button>
 							</div>
 							<!-- /.card-footer -->
 						</form>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Judul_model extends CI_Model
+class tabel_model extends CI_Model
 {
 
 	private $_table = "tabel_data";

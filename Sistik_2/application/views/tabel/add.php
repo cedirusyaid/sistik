@@ -37,12 +37,12 @@ $this->load->view('layout/sidebar.php');
 						</div>
 						<!-- /.card-header -->
 						<!-- form start -->
-						<form class="form-horizontal" action="<?php echo site_url('judul/tambah') ?>" method="POST">
+						<form class="form-horizontal" action="<?php echo site_url('tabel/add') ?>" method="POST">
 							<div class="card-body">
 								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Judul</label>
+									<label class="col-sm-2 col-form-label">Tabel</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" placeholder="Judul" name="tabel_nm">
+										<input type="text" class="form-control" placeholder="Tabel" name="tabel_nm">
 									</div>
 								</div>
 								<div class="form-group row">
