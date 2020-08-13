@@ -78,3 +78,7 @@ $this->load->view('layout/sidebar.php');
 	<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<?php
+$this->load->view('layout/footer');
+?>

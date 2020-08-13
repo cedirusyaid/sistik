@@ -18,17 +18,17 @@
  <script src="<?= base_url('asset/plugins/jquery/jquery.min.js'); ?>"></script>
  <!-- jQuery UI 1.11.4 -->
  <script src="<?= base_url('asset/plugins/jquery-ui/jquery-ui.min.js'); ?>"></script>
+ <!-- DataTables -->
+ <script src="<?= base_url('asset/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+ <script src="<?= base_url('asset/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
+ <script src="<?= base_url('asset/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script>
+ <script src="<?= base_url('asset/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
  <script>
  	$.widget.bridge('uibutton', $.ui.button)
  </script>
  <!-- Bootstrap 4 -->
  <script src="<?= base_url('asset/plugins/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
- <!-- DataTables -->
- <script src="<?= base_url('asset/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
- <script src="<?= base_url('asset/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
- <script src="<?= base_url('asset/plugins/datatables-responsive/js/dataTables.responsive.min.js') ?>"></script> 
- <script src="<?= base_url('asset/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script>
  <!-- ChartJS -->
  <script src="<?= base_url('asset/plugins/chart.js/Chart.min.js'); ?>"></script>
  <!-- Sparkline -->
