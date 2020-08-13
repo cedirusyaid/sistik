@@ -31,14 +31,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `baris_data` (
   `baris_id` int(11) NOT NULL,
   `baris_nm` varchar(255) NOT NULL,
-  `judul_id` int(11) NOT NULL
+  `tabel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `baris_data`
 --
 
-INSERT INTO `baris_data` (`baris_id`, `baris_nm`, `judul_id`) VALUES
+INSERT INTO `baris_data` (`baris_id`, `baris_nm`, `tabel_id`) VALUES
 (1, 'baris satu', 0),
 (2, 'Baris Dua', 0);
 
@@ -56,19 +56,19 @@ CREATE TABLE `isi_data` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `judul_data`
+-- Table structure for table `tabel_data`
 --
 
-CREATE TABLE `judul_data` (
-  `judul_id` int(11) NOT NULL,
-  `judul_nm` varchar(255) NOT NULL
+CREATE TABLE `tabel_data` (
+  `tabel_id` int(11) NOT NULL,
+  `tabel_nm` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `judul_data`
+-- Dumping data for table `tabel_data`
 --
 
-INSERT INTO `judul_data` (`judul_id`, `judul_nm`) VALUES
+INSERT INTO `tabel_data` (`tabel_id`, `tabel_nm`) VALUES
 (1, 'Judul Dua'),
 (2, 'Judul Sepuluh'),
 (3, 'Judul Sebelas'),
@@ -86,7 +86,7 @@ INSERT INTO `judul_data` (`judul_id`, `judul_nm`) VALUES
 CREATE TABLE `kolom_data` (
   `kolom_id` int(11) NOT NULL,
   `kolom_nm` varchar(255) NOT NULL,
-  `judul_id` int(11) NOT NULL
+  `tabel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -117,10 +117,10 @@ ALTER TABLE `isi_data`
   ADD PRIMARY KEY (`isi_id`);
 
 --
--- Indexes for table `judul_data`
+-- Indexes for table `tabel_data`
 --
-ALTER TABLE `judul_data`
-  ADD PRIMARY KEY (`judul_id`);
+ALTER TABLE `tabel_data`
+  ADD PRIMARY KEY (`tabel_id`);
 
 --
 -- Indexes for table `kolom_data`
@@ -151,10 +151,10 @@ ALTER TABLE `isi_data`
   MODIFY `isi_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `judul_data`
+-- AUTO_INCREMENT for table `tabel_data`
 --
-ALTER TABLE `judul_data`
-  MODIFY `judul_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `tabel_data`
+  MODIFY `tabel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kolom_data`

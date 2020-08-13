@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Statistik_model extends CI_Model {
+class Statistik_model extends CI_Model
+{
 
 	public function baris()
 	{
@@ -12,29 +13,29 @@ class Statistik_model extends CI_Model {
 		// $this->load->view('welcome_message');
 	}
 
-		public function judul()
+	public function judul()
 	{
 
-		$hasil = $this->db->get('judul_data');
-		
+		$hasil = $this->db->get('tabel_data');
+
 		return $hasil->result_array();
 		// $this->load->view('welcome_message');
 	}
 
-		public function isi()
+	public function isi()
 	{
 
 		$hasil = $this->db->get('isi_data');
-		
+
 		return $hasil->result_array();
 		// $this->load->view('welcome_message');
 	}
 
-		public function tahun()
+	public function tahun()
 	{
 
 		$hasil = $this->db->get('tahun_data');
-		
+
 		return $hasil->result_array();
 		// $this->load->view('welcome_message');
 	}

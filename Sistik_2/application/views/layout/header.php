@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AdminLTE 3 | Dashboard</title>
+	<title>Statistik</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Font Awesome -->
@@ -17,6 +17,9 @@
 	<link rel="stylesheet" href="<?= base_url('asset/plugins/icheck-bootstrap/icheck-bootstrap.min.css'); ?>">
 	<!-- JQVMap -->
 	<link rel="stylesheet" href="<?= base_url('asset/plugins/jqvmap/jqvmap.min.css'); ?>">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="<?= base_url('asset/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css'); ?>" />
+	<link rel="stylesheet" href="<?= base_url('asset/plugins/datatables-responsive/css/responsive.bootstrap4.min.css'); ?>" />
 	<!-- Theme style -->
 	<link rel="stylesheet" href="<?= base_url('asset/dist/css/adminlte.min.css'); ?>">
 	<!-- overlayScrollbars -->
