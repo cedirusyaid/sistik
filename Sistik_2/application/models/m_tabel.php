@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class tabel_model extends CI_Model
+class m_tabel extends CI_Model
 {
 
 	private $_table = "tabel_data";
@@ -54,5 +54,23 @@ class tabel_model extends CI_Model
 	public function delete($id)
 	{
 		return $this->db->delete($this->_table, array("tabel_id" => $id));
+	}
+
+	public function tabel_baris()
+	{
+		$this->db->select('*');
+		$this->db->from('tabel_data');
+		$this->db->join('baris_data', 'tabel_data.tabel_id=baris_data.tabel_id');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function tabel_kolom()
+	{
+		$this->db->select('*');
+		$this->db->from('tabel_data');
+		$this->db->join('kolom_data', 'tabel_data.tabel_id=kolom_data.tabel_id');
+		$query = $this->db->get();
+		return $query->result();
 	}
 }

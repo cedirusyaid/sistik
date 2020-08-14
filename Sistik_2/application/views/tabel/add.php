@@ -64,3 +64,5 @@ $this->load->view('layout/sidebar.php');
 							<!-- /.card-footer -->
 						</form>
 					</div>
+
+<?php $this->load->view('layout/footer'); ?>

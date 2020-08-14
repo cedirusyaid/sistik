@@ -59,6 +59,10 @@
  			autoWidth: false,
  			responsive: true,
  		});
+ 		$("#table1").DataTable({
+ 			autoWidth: false,
+ 			responsive: true,
+ 		});
  	});
  </script>
  </body>
