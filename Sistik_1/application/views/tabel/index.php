@@ -11,7 +11,7 @@ $this->load->view('layout/sidebar.php');
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>tabel</h1>
+					<h1>Tabel</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -43,6 +43,8 @@ $this->load->view('layout/sidebar.php');
 										<th>No.</th>
 										<th>Tabel</th>
 										<th>Unit</th>
+										<th>Baris</th>
+										<th>Kolom</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -54,11 +56,13 @@ $this->load->view('layout/sidebar.php');
 									?>
 										<tr>
 											<td scope="row"><?= $no . "."; ?></td>
-											<td><?= $data['tabel_nm']; ?></td>
+											<td><a href="#"><?= $data['tabel_nm']; ?></a></td>
 											<td><?= $data['unit_id']; ?></td>
-											<td>
-												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a> |
-												<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('tabel/hapus/' . $data['tabel_id']) ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+											<td><a href="<?php echo site_url('komponen_baris/index/' . $data['tabel_id']) ?>" class="btn btn-primary"><i class="fas fa-info-circle"></i></a> </td>
+											<td><a href="<?php echo site_url('komponen_kolom/index/' . $data['tabel_id']) ?>" class="btn btn-primary"><i class="fas fa-info-circle"></i></a> 
+											<td> 
+												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a> |
+												<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('tabel/hapus/' . $data['tabel_id']) ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
 											</td>
 										</tr>
 									<?php endforeach ?>

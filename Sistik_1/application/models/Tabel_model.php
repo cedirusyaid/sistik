@@ -25,6 +25,7 @@ class tabel_model extends CI_Model
 		];
 	}
 
+
 	public function getAll()
 	{
 		return $this->db->get($this->_table)->result_array();
