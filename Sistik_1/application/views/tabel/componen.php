@@ -237,6 +237,8 @@ $this->load->view('layout/sidebar.php');
 <!-- Modal Delete Baris-->
 <form action="<?= site_url('componen/delete_baris/' . $tabel->tabel_id) ?>" method="post">
 	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
+	<input type="hidden" class="form-control baris_id" name="baris_id" value="<?= $baris->baris_id; ?>">
+
 
 	<div class="modal fade" id="deleteModalBaris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -319,7 +321,7 @@ $this->load->view('layout/footer');
 		});
 
 		// get Delete Baris
-		$('.btn-delete baris').on('click', function() {
+		$('.hapusbaris').on('click', function() {
 			// get data from button edit
 			const id = $(this).data('id');
 			// Set data to Form Edit
@@ -329,7 +331,7 @@ $this->load->view('layout/footer');
 		});
 
 		// get Delete Kolom
-		$('.btn-delete').on('click', function() {
+		$('.hapuskolom').on('click', function() {
 			// get data from button edit
 			const id = $(this).data('id');
 			// Set data to Form Edit

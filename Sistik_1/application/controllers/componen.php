@@ -81,17 +81,23 @@ class componen extends CI_Controller
 		// $data['kolom'] = $kolom->getById($id);
 		// if (!$data['kolom']) show_404();
 
-		// $this->load->view('componen', $data);
-		// // $this->load->view('tabel/edit', $data_array);
+		// $this->load->view('componen/index/', $data);
+		// $this->load->view('tabel/edit', $data_array);
 	}
 
 	public function delete_baris($id = null)
 	{
 		if (!isset($id)) show_404();
-		
+
 		if ($this->m_baris->delete($id)) {
-			redirect(site_url('componen/index/' . $id));
+			redirect(site_url('componen/kembali/'));
 		}
+	}
+
+	public function kembali($id = null)
+	{
+		$data['tabel'] = $this->m_tabel->getById($id);
+		redirect(site_url('componen/index/'. $id));
 	}
 
 	public function delete_kolom($id = null)
@@ -99,7 +105,7 @@ class componen extends CI_Controller
 		if (!isset($id)) show_404();
 
 		if ($this->m_kolom->delete($id)) {
-			redirect(site_url('componen'));
+			redirect(site_url('componen/index/'. $id));
 		}
 	}
 }

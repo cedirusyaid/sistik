@@ -60,6 +60,12 @@ class m_baris extends CI_Model
 		return $this->db->delete($this->_table, array("baris_id" => $id));
 	}
 
+	// public function delete($id){
+	// 	$this->db->delete('b');
+	// 	$this->db->from('baris_data');
+
+	// }
+
 	public function tabel_baris($id=0)
 	{
 		$this->db->select('*');
