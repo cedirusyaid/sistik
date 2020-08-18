@@ -6,7 +6,9 @@ class m_kolom extends CI_Model
 
 	private $_table = "kolom_data";
 
+	public $kolom_id;
 	public $kolom_nm;
+	public $tabel_id;
 
 	public function rules()
 	{
@@ -14,6 +16,11 @@ class m_kolom extends CI_Model
 			[
 				'field' => 'kolom_nm',
 				'label' => 'kolom_nm',
+				'rules' => 'required'
+			],
+			[
+				'field' => 'tabel_id',
+				'label' => 'tabel_id',
 				'rules' => 'required'
 			]
 		];
@@ -33,14 +40,18 @@ class m_kolom extends CI_Model
 	{
 		$post = $this->input->post();
 		$this->kolom_nm = $post["kolom_nm"];
+		$this->tabel_id = $post["tabel_id"];
 		return $this->db->insert($this->_table, $this);
 	}
 
 	public function update()
 	{
 		$post = $this->input->post();
+		$this->kolom_id = $post["kolom_id"];
 		$this->kolom_nm = $post["kolom_nm"];
-		return $this->db->update($this->_table, $this, array('kolom_id' => $post['id']));
+		$this->tabel_id = $post["tabel_id"];
+
+		return $this->db->update($this->_table, $this, array('kolom_id' => $post['kolom_id']));
 	}
 
 	public function delete($id)
