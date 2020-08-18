@@ -6,6 +6,7 @@ class m_baris extends CI_Model
 
 	private $_table = "baris_data";
 
+	public $baris_id;
 	public $baris_nm;
 	public $tabel_id;
 
@@ -46,9 +47,11 @@ class m_baris extends CI_Model
 	public function update()
 	{
 		$post = $this->input->post();
+		$this->baris_id = $post["baris_id"];
 		$this->baris_nm = $post["baris_nm"];
 		$this->tabel_id = $post["tabel_id"];
-		return $this->db->update($this->_table, $this, array('tabel_id' => $post['id']));
+
+		return $this->db->update($this->_table, $this, array('baris_id' => $post['baris_id']));
 	}
 
 	public function delete($id)

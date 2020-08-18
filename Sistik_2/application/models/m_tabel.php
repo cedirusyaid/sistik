@@ -56,11 +56,12 @@ class m_tabel extends CI_Model
 		return $this->db->delete($this->_table, array("tabel_id" => $id));
 	}
 
-	public function tabel_baris()
+	public function tabel_baris($id = null)
 	{
 		$this->db->select('*');
-		$this->db->from('tabel_data');
-		$this->db->join('baris_data', 'tabel_data.tabel_id=baris_data.tabel_id');
+		$this->db->from('baris_data');
+		$this->db->join('tabel_data', 'baris_data.tabel_id = tabel_data.tabel_id');
+		$this->db->where('tabel_data.tabel_id = ',$id);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -73,4 +74,5 @@ class m_tabel extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
 }

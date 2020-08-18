@@ -79,4 +79,12 @@ class tabel extends CI_Controller
 			redirect(site_url('tabel'));
 		}
 	}
+
+	public function detail($id = null)
+	{
+		$data['detail'] = $this->m_tabel->getById($id);
+		$data['baris'] = $this->m_tabel->tabel_baris($id);
+
+		$this->load->view('tabel/detail', $data);
+	}
 }
