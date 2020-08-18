@@ -16,7 +16,7 @@ $this->load->view('layout/sidebar.php');
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active">tabel</li>
+						<li class="breadcrumb-item active">Tabel</li>
 					</ol>
 				</div>
 			</div>
@@ -43,8 +43,6 @@ $this->load->view('layout/sidebar.php');
 										<th>No.</th>
 										<th>Tabel</th>
 										<th>Unit</th>
-										<th>Baris</th>
-										<th>Kolom</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
@@ -56,11 +54,10 @@ $this->load->view('layout/sidebar.php');
 									?>
 										<tr>
 											<td scope="row"><?= $no . "."; ?></td>
-											<td><a href="#"><?= $data['tabel_nm']; ?></a></td>
+											<td><a href="<?= site_url('tabel/detail/' . $data['tabel_id']) ?>"><?= $data['tabel_nm']; ?></a></td>
 											<td><?= $data['unit_id']; ?></td>
-											<td><a href="<?php echo site_url('komponen_baris/index/' . $data['tabel_id']) ?>" class="btn btn-primary"><i class="fas fa-info-circle"></i></a> </td>
-											<td><a href="<?php echo site_url('komponen_kolom/index/' . $data['tabel_id']) ?>" class="btn btn-primary"><i class="fas fa-info-circle"></i></a> 
-											<td> 
+											<td>
+												<a href="<?php echo site_url('componen/index/' . $data['tabel_id']) ?>" class="btn btn-success"><i class="fas fa-eye"></i></a> |
 												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a> |
 												<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('tabel/hapus/' . $data['tabel_id']) ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
 											</td>
