@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class tabel_model extends CI_Model
+class m_tabel extends CI_Model
 {
 
 	private $_table = "tabel_data";
@@ -24,7 +24,6 @@ class tabel_model extends CI_Model
 			],
 		];
 	}
-
 
 	public function getAll()
 	{
@@ -56,4 +55,6 @@ class tabel_model extends CI_Model
 	{
 		return $this->db->delete($this->_table, array("tabel_id" => $id));
 	}
+
+
 }
