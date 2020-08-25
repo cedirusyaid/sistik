@@ -9,6 +9,9 @@ class tabel extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('m_tabel');
+		$this->load->model('m_baris');
+		$this->load->model('m_kolom');
+		$this->load->model('m_isi');
 		$this->load->library('form_validation');
 	}
 
@@ -75,16 +78,68 @@ class tabel extends CI_Controller
 	{
 		if (!isset($id)) show_404();
 
-		if ($this->m_tabel->delete($id)) {
+		if ($this->m_tabel->delete($id) and $this->m_baris->delete_All($id) and $this->m_kolom->delete_all($id)) {
 			redirect(site_url('tabel'));
 		}
 	}
 
-	public function detail($id = null)
+	public function detail($id = null, $tahun = null)
 	{
+		if ($tahun == null) {
+			$tahun = date('Y');
+		}
+
+		$data['tahun'] = $tahun;
+		$data['tahun_awal'] = $tahun - 5;
+
+		$data['baris_col'] = $this->m_baris->getById($id);
 		$data['detail'] = $this->m_tabel->getById($id);
 		$data['baris'] = $this->m_tabel->tabel_baris($id);
+		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
+		$data['tabel_id'] = $id;
 
+		// print_r($data);
 		$this->load->view('tabel/detail', $data);
+	}
+
+	public function edit_detail($id = 0, $tahun = 0)
+	{
+		if ($tahun == null) {
+			$tahun = date('Y');
+		}
+
+		$data['tahun'] = $tahun;
+		$data['tahun_awal'] = $tahun - 5;
+
+		$data['detail'] = $this->m_tabel->getById($id);
+		$data['baris'] = $this->m_tabel->tabel_baris($id);
+		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
+		$data['tabel_id'] = $id;
+
+		// print_r($data);
+		$this->load->view('tabel/edit_detail', $data);
+	}
+
+	public function proses_detail()
+	{
+
+		$data = $this->input->post();
+		// print_r($data);
+
+		$data_form['tahun'] = $this->input->post('tahun');
+		$data_form['tabel_id'] = $this->input->post('tabel_id');
+		$baris = $this->m_tabel->tabel_baris($data_form['tabel_id']);
+		$kolom = $this->m_tabel->tabel_kolom($data_form['tabel_id']);
+
+		foreach ($baris as $brs) :
+			foreach ($kolom as $klm) :
+				$data_form['isi_value'] = $this->input->post('isi_' . $klm->kolom_id . '_' . $brs->baris_id);
+				$data_form['kolom_id'] = $klm->kolom_id;
+				$data_form['baris_id'] = $brs->baris_id;
+				$this->db->insert('isi_data', $data_form);
+				$this->db->replace('isi_data', $data_form);
+			endforeach;
+		endforeach;
+		header('Location: ' . base_url('tabel/detail/' . $data_form['tabel_id'] . '/' . $data_form['tahun']));
 	}
 }

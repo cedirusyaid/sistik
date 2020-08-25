@@ -38,29 +38,47 @@ $this->load->view('layout/sidebar.php');
 						<!-- /.card-header -->
 						<div class="card-body">
 							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i> Tambah Data</button>
-							<table id="table" class="table table-bordered table-striped">
+							<table id="" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>No.</th>
-										<th>Baris</th>
-										<th>Aksi</th>
+										<th class="text-center">No.</th>
+										<th class="text-center">Nama Baris</th>
+										<th class="text-center">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
 									$no = 0;
 									foreach ($baris as $data) :
-										$no++;
+										if ($data->baris_induk == 0) {
+
+											$no++;
 									?>
-										<tr>
-											<td scope="row"><?= $no; ?>.</td>
-											<td><?= $data->baris_nm; ?></td>
-											<td>
-												<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-baris" data-id="<?= $data->baris_id; ?>" data-name="<?= $data->baris_nm; ?>"><i class="fas fa-edit"></i></button> |
-												<button data-toggle="modal" class="btn btn-danger btn-sm btn-delete-baris" data-id="<?= $data->baris_id; ?>"><i class="fas fa-trash"></i></button>
-											</td>
-										</tr>
-									<?php endforeach ?>
+											<tr>
+												<td scope="row"><?= $no; ?>.</td>
+												<td><?= $data->baris_nm; ?></td>
+												<td>
+													<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-baris" data-id="<?= $data->baris_id; ?>" data-name="<?= $data->baris_nm; ?>"><i class="fas fa-edit"></i></button> |
+													<button data-toggle="modal" class="btn btn-danger btn-sm btn-delete-baris" data-id="<?= $data->baris_id; ?>"><i class="fas fa-trash"></i></button>
+												</td>
+											</tr>
+											<?php
+											foreach ($baris as $data1) :
+												if ($data1->baris_induk == $data->baris_id) {
+											?>
+													<tr>
+														<td></td>
+														<td><?= $data1->baris_nm; ?></td>
+														<td>
+															<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-baris" data-id="<?= $data1->baris_id; ?>" data-name="<?= $data1->baris_nm; ?>"><i class="fas fa-edit"></i></button> |
+															<button data-toggle="modal" class="btn btn-danger btn-sm btn-delete-baris" data-id="<?= $data1->baris_id; ?>"><i class="fas fa-trash"></i></button>
+														</td>
+													</tr>
+									<?php
+												}
+											endforeach;
+										}
+									endforeach ?>
 								</tbody>
 							</table>
 						</div>
@@ -81,9 +99,10 @@ $this->load->view('layout/sidebar.php');
 							<table id="table1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>No.</th>
-										<th>Kolom</th>
-										<th>Aksi</th>
+										<th class="text-center">No.</th>
+										<th class="text-center">Kolom</th>
+										<th class="text-center">Tipe</th>
+										<th class="text-center">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -95,8 +114,9 @@ $this->load->view('layout/sidebar.php');
 										<tr>
 											<td scope="row"><?= $no; ?>.</td>
 											<td><?= $data->kolom_nm; ?></td>
+											<td><?= $data->kolom_tipe; ?></td>
 											<td>
-												<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-kolom" data-id="<?= $data->kolom_id; ?>" data-name="<?= $data->kolom_nm; ?>"><i class="fas fa-edit"></i></button> |
+												<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-kolom" data-id="<?= $data->kolom_id; ?>" data-name="<?= $data->kolom_nm; ?>" data-tipe="<?= $data->kolom_tipe ?>"><i class="fas fa-edit"></i></button> |
 												<button data-toggle="modal" class="btn btn-danger btn-sm btn-delete-kolom" data-id="<?= $data->kolom_id; ?>"><i class="fas fa-trash"></i></button>
 											</td>
 										</tr>
@@ -115,15 +135,19 @@ $this->load->view('layout/sidebar.php');
 		<!-- /.container-fluid -->
 	</section>
 	<!-- /.content -->
+	<div class="text m-3">
+		<p class="text-monospace">
+			Untuk Melihat Nilai Baris dan Kolom Silahkan <a href="<?= base_url('tabel/detail/' . $tabel->tabel_id) ?>"> Klik Disini </a>
+		</p>
+	</div>
 </div>
 <!-- /.content-wrapper -->
 
 <!-- Baris Section Modal -->
-
 <!-- Modal Tambah Baris-->
 <form action="<?= site_url('componen/add_baris/' . $tabel->tabel_id) ?>" method="post">
 	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
-	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -133,6 +157,20 @@ $this->load->view('layout/sidebar.php');
 					</button>
 				</div>
 				<div class="modal-body">
+					<div class="form-group">
+						<label>Baris Induk</label>
+						<div class="dropdown bootstrap-select dropdown w-100">
+							<select class="form-control" name="baris_induk">
+								<option>Pilih Baris Induk</option>
+								<?php
+								foreach ($baris as $data) :
+									if ($data->baris_induk == 0) { ?>
+										<option value="<?= $data->baris_id ?>"><?= $data->baris_nm ?></option>
+								<?php };
+								endforeach ?>
+							</select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label>Nama Baris</label>
 						<input type="text" class="form-control" name="baris_nm" placeholder="Nama Baris">
@@ -150,7 +188,7 @@ $this->load->view('layout/sidebar.php');
 
 <!-- Modal Edit Baris-->
 <form action="<?= site_url('componen/edit_baris/' . $tabel->tabel_id) ?>" method="post">
-	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="editModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -160,6 +198,25 @@ $this->load->view('layout/sidebar.php');
 					</button>
 				</div>
 				<div class="modal-body">
+					<div class="form-group">
+						<label>Baris Induk</label>
+						<div class="dropdown bootstrap-select dropdown w-100">
+							<select class="form-control" name="baris_induk">
+								<option value="0">Pilih Baris Induk</option>
+								<?php
+								foreach ($baris as $data2) :
+									if ($data2->baris_induk == 0 and $data2->baris_induk !== $data2->baris_id) { ?>
+										<option value="<?= $data2->baris_id ?>" <?php if ($data2->baris_id !== $data2->baris_induk) {
+																															echo "selected";
+																														}
+																														?>>
+											<?= $data2->baris_nm ?>
+										</option>
+								<?php };
+								endforeach ?>
+							</select>
+						</div>
+					</div>
 					<div class="form-group">
 						<label>Nama Baris</label>
 						<input type="text" class="form-control baris_nm" name="baris_nm" placeholder="Nama Baris">
@@ -203,11 +260,9 @@ $this->load->view('layout/sidebar.php');
 	</div>
 </form>
 <!-- End Modal Delete Baris -->
-
 <!-- End Baris Section Modal -->
 
 <!-- kolom Section Modal -->
-
 <!-- Modal Tambah kolom-->
 <form action="<?= site_url('componen/add_kolom/' . $tabel->tabel_id) ?>" method="post">
 	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
@@ -224,6 +279,11 @@ $this->load->view('layout/sidebar.php');
 					<div class="form-group">
 						<label>Nama Kolom</label>
 						<input type="text" class="form-control" name="kolom_nm" placeholder="Nama Kolom">
+					</div>
+					<div class="form-group">
+						<label>Tipe Kolom</label> <br>
+						<label class="radio-inline"><input type="radio" name="kolom_tipe" value="1"> Angka </label>
+						<label class="radio-inline"><input type="radio" name="kolom_tipe" value="2"> Text </label>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -252,6 +312,11 @@ $this->load->view('layout/sidebar.php');
 						<label>Nama Kolom</label>
 						<input type="text" class="form-control kolom_nm" name="kolom_nm">
 					</div>
+					<div class="form-group">
+						<label>Tipe Kolom</label> <br>
+						<label class="radio-inline"><input type="radio" name="kolom_tipe" class="form-control kolom_nm"> Angka </label>
+						<label class="radio-inline"><input type="radio" name="kolom_tipe" class="form-control kolom_nm"> Text </label>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
@@ -268,7 +333,7 @@ $this->load->view('layout/sidebar.php');
 <!-- Modal Delete kolom-->
 <form action="<?= site_url('componen/delete_kolom/' . $tabel->tabel_id) ?>" method="post">
 	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
-	<input type="hidden" name="kolom_id" class="kolomID">
+	<input type="hidden" name="kolom_id" class="kolom_id">
 
 	<div class="modal fade" id="deleteModal-kolom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -280,7 +345,7 @@ $this->load->view('layout/sidebar.php');
 					</button>
 				</div>
 				<div class="modal-body">
-					<h4>Are you sure want to delete this product?</h4>
+					<h4>Apakah Anda Ingin Menghapus Baris ini ?</h4>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -291,9 +356,7 @@ $this->load->view('layout/sidebar.php');
 	</div>
 </form>
 <!-- End Modal Delete Baris -->
-
 <!-- End Baris Section Modal -->
-
 
 <?php
 $this->load->view('layout/footer');
@@ -331,6 +394,7 @@ $this->load->view('layout/footer');
 			// Set data to Form Edit
 			$('.kolom_id').val(id);
 			$('.kolom_nm').val(name);
+			$('.kolom_tipe').val(tipe);
 			// Call Modal Edit
 			$('#editModal-kolom').modal('show');
 		});
@@ -340,7 +404,7 @@ $this->load->view('layout/footer');
 			// get data from button edit
 			const id = $(this).data('id');
 			// Set data to Form Edit
-			$('.kolomID').val(id);
+			$('.kolom_id').val(id);
 			// Call Modal Edit
 			$('#deleteModal-kolom').modal('show');
 		});

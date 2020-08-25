@@ -40,10 +40,10 @@ $this->load->view('layout/sidebar.php');
 							<table id="table" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>No.</th>
-										<th>Tabel</th>
-										<th>Unit</th>
-										<th>Aksi</th>
+										<th class="text-center">No.</th>
+										<th class="text-center">Tabel</th>
+										<th class="text-center">Nama Unit</th>
+										<th class="text-center">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -55,7 +55,7 @@ $this->load->view('layout/sidebar.php');
 										<tr>
 											<td scope="row"><?= $no . "."; ?></td>
 											<td><a href="<?= site_url('tabel/detail/' . $data['tabel_id']) ?>"><?= $data['tabel_nm']; ?></a></td>
-											<td><?= $data['unit_id']; ?></td>
+											<td><?= $data['unit_nm']; ?></td>
 											<td>
 												<a href="<?php echo site_url('componen/index/' . $data['tabel_id']) ?>" class="btn btn-success"><i class="fas fa-eye"></i></a> |
 												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a> |

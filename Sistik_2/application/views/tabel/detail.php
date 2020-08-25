@@ -32,33 +32,82 @@ $this->load->view('layout/sidebar.php');
 
 					<div class="card">
 						<div class="card-header text-center">
-							<h3 class="card-title"><?= $detail->tabel_nm; ?></h3>
+							<h1 class="card-title"><?= $detail->tabel_nm; ?></h1>
+							<a href="<?= base_url('tabel/edit_detail/' . $tabel_id) . '/' . $tahun ?>" class="btn btn-outline-primary float-right">
+								<i class="fas fa-edit"></i>
+							</a>
 						</div>
+						<div class="card-header">
+							<h3 class="card-title col-md-2">Tahun </h3>
+							<select class="col-md-2 form-control" name="" id="" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+								<?php
+								for ($i = $tahun_awal; $i <= $tahun; $i++) { ?>
+									<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i) ?>" <?php
+																																													if ($i == $tahun) {
+																																														echo " selected";
+																																													}
+																																													?>>
+										<?= $i; ?>
+									</option>
+								<?php
+								}
+								?>
+							</select>
+						</div>
+
 						<!-- /.card-header -->
 						<div class="card-body">
 							<table id="table" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th>Data Statis</th>
-										<th>Unit</th>
-										<th>Baris</th>
-										<th>Kolom</th>
+										<th>No</th>
+										<th>Uraian</th>
+										<?php
+										$no = 0;
+										foreach ($kolom as $data) :
+											$no++;
+										?>
+											<th><?= $data->kolom_nm ?></th>
+										<?php endforeach ?>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td></td>
-										<td><?= $detail->unit_id; ?></td>
-										<td>
+									<?php
+									$no = 0;
+									foreach ($baris as $brs) :
+										if ($brs->baris_induk == 0) {
+											$no++;
+									?>
+											<tr>
+												<td><?= $no ?></td>
+												<td>
+													<?= $brs->baris_nm ?>
+												</td>
+												<td colspan="<?= count($kolom) ?>"></td>
+											</tr>
 											<?php
-											$no = 0;
-											foreach ($baris as $data) :
-												$no++;
+											foreach ($baris as $data1) :
+												if ($data1->baris_induk == $brs->baris_id) {
 											?>
-												- <?= $data->baris_nm ?> <br>
-											<?php endforeach ?>
-										</td>
-									</tr>
+													<tr>
+														<td></td>
+														<td><?= $data1->baris_nm; ?></td>
+														<?php
+														foreach ($kolom as $klm) :
+															$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $data1->baris_id, $tahun);
+															if (isset($isi)) {
+																$value = $isi->isi_value;
+															} else {
+																$value = "";
+															}
+														?>
+															<td><?= $value  ?></td>
+														<?php endforeach ?>
+												<?php };
+											endforeach ?>
+													</tr>
+											<?php };
+									endforeach ?>
 								</tbody>
 							</table>
 						</div>

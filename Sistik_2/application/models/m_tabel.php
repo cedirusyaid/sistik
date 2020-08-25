@@ -8,6 +8,7 @@ class m_tabel extends CI_Model
 
 	public $tabel_nm;
 	public $unit_id;
+	public $unit_nm;
 
 	public function rules()
 	{
@@ -20,6 +21,11 @@ class m_tabel extends CI_Model
 			[
 				'field' => 'unit_id',
 				'label' => 'unit_id',
+				'rules' => 'required'
+			],
+			[
+				'field' => 'unit_nm',
+				'label' => 'unit_nm',
 				'rules' => 'required'
 			],
 		];
@@ -40,6 +46,7 @@ class m_tabel extends CI_Model
 		$post = $this->input->post();
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
+		$this->unit_nm = $post["unit_nm"];
 		return $this->db->insert($this->_table, $this);
 	}
 
@@ -48,6 +55,7 @@ class m_tabel extends CI_Model
 		$post = $this->input->post();
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
+		$this->unit_nm = $post["unit_nm"];
 		return $this->db->update($this->_table, $this, array('tabel_id' => $post['id']));
 	}
 
@@ -66,13 +74,13 @@ class m_tabel extends CI_Model
 		return $query->result();
 	}
 
-	public function tabel_kolom()
+	public function tabel_kolom($id = null)
 	{
 		$this->db->select('*');
-		$this->db->from('tabel_data');
-		$this->db->join('kolom_data', 'tabel_data.tabel_id=kolom_data.tabel_id');
+		$this->db->from('kolom_data');
+		$this->db->join('tabel_data', 'kolom_data.tabel_id = tabel_data.tabel_id');
+		$this->db->where('tabel_data.tabel_id = ', $id);
 		$query = $this->db->get();
 		return $query->result();
 	}
-
 }

@@ -19,8 +19,9 @@ class componen extends CI_Controller
 	public function index($id = null)
 	{
 		$data['baris'] = $this->m_tabel->tabel_baris($id);
+		$data['baris_col'] = $this->m_baris->getById($id);
 		$data['coba'] = $this->m_baris->getById($id);
-		$data['kolom'] = $this->m_tabel->tabel_kolom();
+		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
 		$data['tabel'] = $this->m_tabel->getById($id);
 
 		$this->load->view('tabel/componen', $data);
