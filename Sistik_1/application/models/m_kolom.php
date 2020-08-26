@@ -9,6 +9,7 @@ class m_kolom extends CI_Model
 	public $kolom_nm;
 	public $kolom_id;
 	public $tabel_id;
+	public $kolom_tipe;
 
 	public function rules()
 	{
@@ -40,6 +41,7 @@ class m_kolom extends CI_Model
 	{
 		$post = $this->input->post();
 		$this->kolom_nm = $post["kolom_nm"];
+		$this->kolom_tipe = $post["kolom_tipe"];
 		$this->tabel_id = $post["tabel_id"];
 		return $this->db->insert($this->_table, $this);
 	}
@@ -49,6 +51,7 @@ class m_kolom extends CI_Model
 		$post = $this->input->post();
 		$this->kolom_nm = $post["kolom_nm"];
 		$this->tabel_id = $post["tabel_id"];
+		$this->kolom_tipe = $post["kolom_tipe"];
 		$this->kolom_id = $post["kolom_id"];
 		return $this->db->update($this->_table, $this, array('kolom_id' => $post['kolom_id']));
 	}
@@ -58,7 +61,11 @@ class m_kolom extends CI_Model
 		return $this->db->delete($this->_table, array("kolom_id" => $id));
 	}
 
-	
+	public function hapus_tabel_kolom($id)
+	{
+		return $this->db->delete($this->_table, array("tabel_id" => $id));
+	}
+
 
 	public function tabel_kolom($id=0)
 	{
@@ -69,4 +76,5 @@ class m_kolom extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
 }

@@ -42,11 +42,11 @@ $this->load->view('layout/sidebar.php');
 									<tr>
 										<th>No.</th>
 										<th>Tabel</th>
-										<th>Unit</th>
+										<th>Nama Unit</th>
 										<th>Aksi</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody> 
 									<?php
 									$no = 0;
 									foreach ($tabel as $data) :
@@ -55,7 +55,7 @@ $this->load->view('layout/sidebar.php');
 										<tr>
 											<td scope="row"><?= $no . "."; ?></td>
 											<td><a href="<?= site_url('tabel/detail/' . $data['tabel_id']) ?>"><?= $data['tabel_nm']; ?></a></td>
-											<td><?= $data['unit_id']; ?></td>
+											<td><?= $data['unit_nm']; ?></td>
 											<td>
 												<a href="<?php echo site_url('componen/index/' . $data['tabel_id']) ?>" class="btn btn-success"><i class="fas fa-eye"></i></a> |
 												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a> |

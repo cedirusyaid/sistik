@@ -81,25 +81,23 @@ class componen extends CI_Controller
 		// $data['kolom'] = $kolom->getById($id);
 		// if (!$data['kolom']) show_404();
 
-		// $this->load->view('componen', $data);
-		// // $this->load->view('tabel/edit', $data_array);
+		// $this->load->view('componen/index/', $data);
+		// $this->load->view('tabel/edit', $data_array);
 	}
 
-	public function delete_baris($id = null)
+	public function delete_baris($idi = null)
 	{
-		if (!isset($id)) show_404();
-		
-		if ($this->m_baris->delete($id)) {
-			redirect(site_url('componen/index/' . $id));
-		}
+		$baris = $this->m_baris;
+		$id = $this->input->post('baris_id');
+		$baris->delete($id);
+		redirect(site_url('componen/index/' . $idi));
 	}
 
-	public function delete_kolom($id = null)
+	public function delete_kolom($idi = null)
 	{
-		if (!isset($id)) show_404();
-
-		if ($this->m_kolom->delete($id)) {
-			redirect(site_url('componen'));
-		}
+		$kolom = $this->m_kolom;
+		$id = $this->input->post('kolom_id');
+		$kolom->delete($id);
+		redirect(site_url('componen/index/' . $idi));
 	}
 }
