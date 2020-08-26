@@ -43,7 +43,7 @@ class m_baris extends CI_Model
 
 		$this->baris_nm = $post["baris_nm"];
 		$this->tabel_id = $post["tabel_id"];
-		// $this->baris_induk = $post["baris_induk"];
+		$this->baris_induk = $post["baris_induk"];
 		// if (isset($post["baris_induk"]) == 0) {
 		// 	$this->baris_induk = 0;
 		// } else {

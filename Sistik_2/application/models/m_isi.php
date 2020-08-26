@@ -28,7 +28,7 @@ class m_isi extends CI_Model
 	public function isi_value($tabel_id = null, $kolom_id = null, $baris_id = null, $tahun)
 	{
 		// $query = $this->db->query("
-		
+
 		// 	SELECT A.* 
 		// 	FROM isi_data A
 		// 	WHERE A.tabel_id = $tabel_id
@@ -36,7 +36,7 @@ class m_isi extends CI_Model
 		// 	AND A.baris_id = $baris_id
 		// 	AND A.tahun = $tahun  
 		// 	LIMIT 1
-		
+
 		// ");
 
 		$this->db->select('*');
@@ -48,4 +48,5 @@ class m_isi extends CI_Model
 		$query = $this->db->get();
 		return $query->row();
 	}
+
 }

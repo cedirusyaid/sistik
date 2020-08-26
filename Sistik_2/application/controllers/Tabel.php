@@ -109,7 +109,7 @@ class tabel extends CI_Controller
 		}
 
 		$data['tahun'] = $tahun;
-		$data['tahun_awal'] = $tahun - 5;
+		// $data['tahun_awal'] = $tahun - 5;
 
 		$data['detail'] = $this->m_tabel->getById($id);
 		$data['baris'] = $this->m_tabel->tabel_baris($id);
@@ -142,4 +142,5 @@ class tabel extends CI_Controller
 		endforeach;
 		header('Location: ' . base_url('tabel/detail/' . $data_form['tabel_id'] . '/' . $data_form['tahun']));
 	}
+
 }

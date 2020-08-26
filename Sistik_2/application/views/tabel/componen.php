@@ -50,7 +50,7 @@ $this->load->view('layout/sidebar.php');
 									<?php
 									$no = 0;
 									foreach ($baris as $data) :
-										if ($data->baris_induk == 0) {
+										if ($data->baris_induk == 0 || $data->baris_induk == 1) {
 
 											$no++;
 									?>
@@ -161,7 +161,8 @@ $this->load->view('layout/sidebar.php');
 						<label>Baris Induk</label>
 						<div class="dropdown bootstrap-select dropdown w-100">
 							<select class="form-control" name="baris_induk">
-								<option>Pilih Baris Induk</option>
+								<option value="1">Baris Induk</option>
+								<option value="0">Baris Induk - Anak</option>
 								<?php
 								foreach ($baris as $data) :
 									if ($data->baris_induk == 0) { ?>
@@ -202,7 +203,8 @@ $this->load->view('layout/sidebar.php');
 						<label>Baris Induk</label>
 						<div class="dropdown bootstrap-select dropdown w-100">
 							<select class="form-control" name="baris_induk">
-								<option value="0">Pilih Baris Induk</option>
+								<option value="1">Baris Induk</option>
+								<option value="0">Baris Induk - Anak</option>
 								<?php
 								foreach ($baris as $data2) :
 									if ($data2->baris_induk == 0 and $data2->baris_induk !== $data2->baris_id) { ?>
@@ -314,8 +316,8 @@ $this->load->view('layout/sidebar.php');
 					</div>
 					<div class="form-group">
 						<label>Tipe Kolom</label> <br>
-						<label class="radio-inline"><input type="radio" name="kolom_tipe" class="form-control kolom_nm"> Angka </label>
-						<label class="radio-inline"><input type="radio" name="kolom_tipe" class="form-control kolom_nm"> Text </label>
+						<label class="radio-inline"><input type="radio" name="kolom_tipe" value="1"> Angka </label>
+						<label class="radio-inline"><input type="radio" name="kolom_tipe" value="2"> Text </label>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -391,6 +393,7 @@ $this->load->view('layout/footer');
 			// get data from button edit
 			const id = $(this).data('id');
 			const name = $(this).data('name');
+			const tipe = $(this).data('tipe');
 			// Set data to Form Edit
 			$('.kolom_id').val(id);
 			$('.kolom_nm').val(name);

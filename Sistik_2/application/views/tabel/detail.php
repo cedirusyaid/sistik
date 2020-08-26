@@ -75,7 +75,7 @@ $this->load->view('layout/sidebar.php');
 									<?php
 									$no = 0;
 									foreach ($baris as $brs) :
-										if ($brs->baris_induk == 0) {
+										if ($brs->baris_induk == 0 || $brs->baris_induk == 1) {
 											$no++;
 									?>
 											<tr>
@@ -83,7 +83,17 @@ $this->load->view('layout/sidebar.php');
 												<td>
 													<?= $brs->baris_nm ?>
 												</td>
-												<td colspan="<?= count($kolom) ?>"></td>
+												<?php
+												foreach ($kolom as $klm) :
+													$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $brs->baris_id, $tahun);
+													if (isset($isi)) {
+														$value = $isi->isi_value;
+													} else {
+														$value = "";
+													}
+												?>
+													<td><?= $value  ?></td>
+												<?php endforeach ?>
 											</tr>
 											<?php
 											foreach ($baris as $data1) :
