@@ -64,5 +64,14 @@ class m_tabel extends CI_Model
 		return $this->db->delete($this->_table, array("tabel_id" => $id));
 	}
 
+	public function json_value($tabel_id = null)
+	{
+		$this->db->select('isi_value, kolom_id, baris_id');
+		$this->db->from('isi_data');
+		$this->db->where('tabel_id = ', $tabel_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 
 }

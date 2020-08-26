@@ -38,6 +38,19 @@ class m_baris extends CI_Model
 		return $this->db->get_where($this->_table, ["baris_id" => $id])->row();
 	}
 
+	public function getBarisAll($tabel_id = 0)
+	{
+		$query = $this->db->query("
+
+			SELECT A.*,
+			(SELECT COUNT(B.baris_id) FROM baris_data B WHERE A.baris_id = B.baris_induk ) AS jumlah_anak
+			FROM baris_data A
+			WHERE A.tabel_id = $tabel_id
+
+		");
+		return $query->result();
+	}
+
 	public function save()
 	{
 		$post = $this->input->post();
@@ -78,6 +91,15 @@ class m_baris extends CI_Model
 		$this->db->from('tabel_data');
 		$this->db->join('baris_data', 'tabel_data.tabel_id=baris_data.tabel_id');
 		$this->db->where('tabel_data.tabel_id = ', $id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function json_baris($tabel_id = null)
+	{
+		$this->db->select('baris_id,baris_nm,baris_induk');
+		$this->db->from('baris_data');
+		$this->db->where('tabel_id = ', $tabel_id);
 		$query = $this->db->get();
 		return $query->result();
 	}

@@ -77,4 +77,12 @@ class m_kolom extends CI_Model
 		return $query->result();
 	}
 
+	public function json_kolom($tabel_id = null)
+	{
+		$this->db->select('kolom_id,kolom_nm,kolom_tipe');
+		$this->db->from('kolom_data');
+		$this->db->where('tabel_id = ', $tabel_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
