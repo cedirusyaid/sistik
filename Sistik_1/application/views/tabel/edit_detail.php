@@ -2,8 +2,6 @@
 $this->load->view('layout/header');
 
 $this->load->view('layout/sidebar.php');
-
-// $this->load->model('m_isi');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -34,7 +32,7 @@ $this->load->view('layout/sidebar.php');
 
 					<div class="card">
 						<div class="card-header text-center">
-							<h3 class="card-title"><?= $detail->tabel_nm; ?> Tahun <?= $tahun ?></h3>
+							<h3 class="card-title"><?= $detail->tabel_nm; ?></h3>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
@@ -60,7 +58,7 @@ $this->load->view('layout/sidebar.php');
 										<?php
 										$no = 0;
 										foreach ($baris as $brs) :
-											if ($brs->baris_induk == 0) {
+											if ($brs->baris_induk == 0 || $brs->baris_induk == 1) {
 												$no++;
 										?>
 												<tr>
@@ -68,8 +66,23 @@ $this->load->view('layout/sidebar.php');
 													<td>
 														<?= $brs->baris_nm ?>
 													</td>
-													<td colspan="3"></td>
-
+													<?php
+													foreach ($kolom as $klm) :
+														$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $brs->baris_id, $tahun);
+														if (isset($isi)) {
+															$value = $isi->isi_value;
+														} else {
+															$value = "";
+														}
+													?>
+														<td>
+															<input type="<?php if ($brs->baris_induk == 0) {
+																echo "hidden";
+															} else if ($brs->baris_induk == 1) {
+																echo "text";
+															} ?>" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $brs->baris_id; ?>" value="<?= $value  ?>">
+														</td>
+													<?php endforeach ?>
 												</tr>
 												<?php
 												foreach ($baris as $data1) :
@@ -80,7 +93,7 @@ $this->load->view('layout/sidebar.php');
 															<td><?= $data1->baris_nm; ?></td>
 															<?php
 															foreach ($kolom as $klm) :
-																$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $brs->baris_id, $tahun);
+																$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $data1->baris_id, $tahun);
 																if (isset($isi)) {
 																	$value = $isi->isi_value;
 																} else {
@@ -88,7 +101,7 @@ $this->load->view('layout/sidebar.php');
 																}
 															?>
 																<td>
-																	<input type="text" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $brs->baris_id; ?>" value="<?= $value  ?>">
+																	<input type="text" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $data1->baris_id; ?>" value="<?= $value  ?>">
 																</td>
 															<?php endforeach ?>
 														</tr>

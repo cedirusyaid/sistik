@@ -2,8 +2,6 @@
 $this->load->view('layout/header');
 
 $this->load->view('layout/sidebar.php');
-
-// $this->load->model('m_isi');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -35,13 +33,13 @@ $this->load->view('layout/sidebar.php');
 					<div class="card">
 						<div class="card-header text-center">
 							<h1 class="card-title"><?= $detail->tabel_nm; ?></h1>
-							<a href="<?= base_url('tabel/edit_detail/' . $tabel_id) . '/' . $tahun ?>" class="btn btn-primary float-right">
+							<a href="<?= base_url('tabel/edit_detail/' . $tabel_id) . '/' . $tahun ?>" class="btn btn-outline-primary float-right">
 								<i class="fas fa-edit"></i>
 							</a>
 						</div>
 						<div class="card-header">
-							<h3 class="card-title col-md-2">Tahun : </h3>
-							<select class="form-control col-md-2" name="" id="" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+							<h3 class="card-title col-md-2">Tahun </h3>
+							<select class="col-md-2 form-control" name="" id="" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
 								<?php
 								for ($i = $tahun_awal; $i <= $tahun; $i++) { ?>
 									<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i) ?>" <?php
@@ -59,7 +57,7 @@ $this->load->view('layout/sidebar.php');
 
 						<!-- /.card-header -->
 						<div class="card-body">
-							<table id="table" class="table table-bordered table-striped">
+							<table id="" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -77,7 +75,7 @@ $this->load->view('layout/sidebar.php');
 									<?php
 									$no = 0;
 									foreach ($baris as $brs) :
-										if ($brs->baris_induk == 0) {
+										if ($brs->baris_induk == 0 || $brs->baris_induk == 1) {
 											$no++;
 									?>
 											<tr>
@@ -104,10 +102,21 @@ $this->load->view('layout/sidebar.php');
 													<tr>
 														<td></td>
 														<td><?= $data1->baris_nm; ?></td>
+														<?php
+														foreach ($kolom as $klm) :
+															$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $data1->baris_id, $tahun);
+															if (isset($isi)) {
+																$value = $isi->isi_value;
+															} else {
+																$value = "";
+															}
+														?>
+															<td><?= $value  ?></td>
+														<?php endforeach ?>
+												<?php };
+											endforeach ?>
 													</tr>
 											<?php };
-											endforeach ?>
-									<?php };
 									endforeach ?>
 								</tbody>
 							</table>
@@ -129,4 +138,3 @@ $this->load->view('layout/sidebar.php');
 <?php
 $this->load->view('layout/footer');
 ?>
-

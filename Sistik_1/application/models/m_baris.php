@@ -43,6 +43,7 @@ class m_baris extends CI_Model
 		$post = $this->input->post();
 		$this->baris_nm = $post["baris_nm"];
 		$this->tabel_id = $post["tabel_id"];
+		$this->baris_induk = $post["baris_induk"];
 		return $this->db->insert($this->_table, $this);
 	}
 
