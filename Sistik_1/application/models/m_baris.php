@@ -60,6 +60,11 @@ class m_baris extends CI_Model
 		return $this->db->delete($this->_table, array("baris_id" => $id));
 	}
 
+	public function hapus_tabel_baris($id)
+	{
+		return $this->db->delete($this->_table, array("tabel_id" => $id));
+	}
+
 	// public function delete($id){
 	// 	$this->db->delete('b');
 	// 	$this->db->from('baris_data');

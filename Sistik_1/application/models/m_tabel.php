@@ -8,6 +8,7 @@ class m_tabel extends CI_Model
 
 	public $tabel_nm;
 	public $unit_id;
+	public $unit_nm;
 
 	public function rules()
 	{
@@ -20,6 +21,11 @@ class m_tabel extends CI_Model
 			[
 				'field' => 'unit_id',
 				'label' => 'unit_id',
+				'rules' => 'required'
+			],
+			[
+				'field' => 'unit_nm',
+				'label' => 'unit_nm',
 				'rules' => 'required'
 			],
 		];
@@ -40,6 +46,7 @@ class m_tabel extends CI_Model
 		$post = $this->input->post();
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
+		$this->unit_nm = $post["unit_nm"];
 		return $this->db->insert($this->_table, $this);
 	}
 
@@ -48,6 +55,7 @@ class m_tabel extends CI_Model
 		$post = $this->input->post();
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
+		$this->unit_nm = $post["unit_nm"];
 		return $this->db->update($this->_table, $this, array('tabel_id' => $post['id']));
 	}
 
