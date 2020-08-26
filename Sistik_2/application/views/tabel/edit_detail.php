@@ -57,8 +57,8 @@ $this->load->view('layout/sidebar.php');
 
 										<?php
 										$no = 0;
-										foreach ($baris as $brs) :
-											if ($brs->baris_induk == 0 || $brs->baris_induk == 1) {
+										foreach ($baris_col as $brs) :
+											if ($brs->baris_induk == 0) {
 												$no++;
 										?>
 												<tr>
@@ -76,10 +76,10 @@ $this->load->view('layout/sidebar.php');
 														}
 													?>
 														<td>
-															<input type="<?php if ($brs->baris_induk == 0) {
-																echo "hidden";
-															} else if ($brs->baris_induk == 1) {
+															<input type="<?php if ($brs->jumlah_anak == 0) {
 																echo "text";
+															} else if ($brs->jumlah_anak > 0) {
+																echo "hidden";
 															} ?>" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $brs->baris_id; ?>" value="<?= $value  ?>">
 														</td>
 													<?php endforeach ?>

@@ -41,7 +41,7 @@ $this->load->view('layout/sidebar.php');
 							<h3 class="card-title col-md-2">Tahun </h3>
 							<select class="col-md-2 form-control" name="" id="" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
 								<?php
-								for ($i = $tahun_awal; $i <= $tahun; $i++) { ?>
+								for ($i = 2015; $i <= date('Y'); $i++) { ?>
 									<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i) ?>" <?php
 																																													if ($i == $tahun) {
 																																														echo " selected";
@@ -75,7 +75,7 @@ $this->load->view('layout/sidebar.php');
 									<?php
 									$no = 0;
 									foreach ($baris as $brs) :
-										if ($brs->baris_induk == 0 || $brs->baris_induk == 1) {
+										if ($brs->baris_induk == 0) {
 											$no++;
 									?>
 											<tr>

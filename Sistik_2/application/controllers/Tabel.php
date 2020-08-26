@@ -90,9 +90,8 @@ class tabel extends CI_Controller
 		}
 
 		$data['tahun'] = $tahun;
-		$data['tahun_awal'] = $tahun - 5;
 
-		$data['baris_col'] = $this->m_baris->getById($id);
+		$data['baris_col'] = $this->m_baris->getBarisAll($id);
 		$data['detail'] = $this->m_tabel->getById($id);
 		$data['baris'] = $this->m_tabel->tabel_baris($id);
 		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
@@ -112,6 +111,7 @@ class tabel extends CI_Controller
 		// $data['tahun_awal'] = $tahun - 5;
 
 		$data['detail'] = $this->m_tabel->getById($id);
+		$data['baris_col'] = $this->m_baris->getBarisAll($id);
 		$data['baris'] = $this->m_tabel->tabel_baris($id);
 		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
 		$data['tabel_id'] = $id;
@@ -143,4 +143,33 @@ class tabel extends CI_Controller
 		header('Location: ' . base_url('tabel/detail/' . $data_form['tabel_id'] . '/' . $data_form['tahun']));
 	}
 
+	public function json($id = null, $tahun = null)
+	{
+		if ($tahun == null) {
+			$tahun = date('Y');
+		}
+
+		$data['tahun'] = $tahun;
+
+		$tabel_id = $id;
+		$baris_col = $this->m_baris->getBarisAll($id);
+		// $baris = $this->m_tabel->tabel_baris($id);
+		// $kolom = $this->m_tabel->tabel_kolom($id);
+		$kolom = $this->m_kolom->selectDataKolom($id);
+		$baris = $this->m_baris->selectDataBaris($id);
+		$isi = $this->m_isi->selectDataIsi($id);
+		$value = $this->m_baris->value($id);
+
+		$json_data = $this->m_tabel->getById($id);
+		$json_data->tahun = $tahun;
+		$json_table = [
+			"Header" => $kolom,
+			"Body" => $baris,
+			"Value" => $value
+		];
+
+		$json['json_data'] = $json_data;
+		$json['json_table'] = $json_table;
+		echo json_encode($json);
+	}
 }

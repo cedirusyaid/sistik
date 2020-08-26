@@ -49,14 +49,17 @@ $this->load->view('layout/sidebar.php');
 								<tbody>
 									<?php
 									$no = 0;
-									foreach ($baris as $data) :
+									foreach ($baris_col as $data) :
+										// print_r($data);
 										if ($data->baris_induk == 0 || $data->baris_induk == 1) {
 
 											$no++;
 									?>
 											<tr>
 												<td scope="row"><?= $no; ?>.</td>
-												<td><?= $data->baris_nm; ?></td>
+												<td>
+													<?= $data->baris_nm; ?>
+												</td>
 												<td>
 													<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-baris" data-id="<?= $data->baris_id; ?>" data-name="<?= $data->baris_nm; ?>"><i class="fas fa-edit"></i></button> |
 													<button data-toggle="modal" class="btn btn-danger btn-sm btn-delete-baris" data-id="<?= $data->baris_id; ?>"><i class="fas fa-trash"></i></button>
@@ -161,8 +164,7 @@ $this->load->view('layout/sidebar.php');
 						<label>Baris Induk</label>
 						<div class="dropdown bootstrap-select dropdown w-100">
 							<select class="form-control" name="baris_induk">
-								<option value="1">Baris Induk</option>
-								<option value="0">Baris Induk - Anak</option>
+								<option>Pilih Baris Induk</option>
 								<?php
 								foreach ($baris as $data) :
 									if ($data->baris_induk == 0) { ?>

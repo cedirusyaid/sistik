@@ -27,18 +27,6 @@ class m_isi extends CI_Model
 
 	public function isi_value($tabel_id = null, $kolom_id = null, $baris_id = null, $tahun)
 	{
-		// $query = $this->db->query("
-
-		// 	SELECT A.* 
-		// 	FROM isi_data A
-		// 	WHERE A.tabel_id = $tabel_id
-		// 	AND A.kolom_id = $kolom_id
-		// 	AND A.baris_id = $baris_id
-		// 	AND A.tahun = $tahun  
-		// 	LIMIT 1
-
-		// ");
-
 		$this->db->select('*');
 		$this->db->from('isi_data');
 		$this->db->where('isi_data.tabel_id = ', $tabel_id);
@@ -49,4 +37,21 @@ class m_isi extends CI_Model
 		return $query->row();
 	}
 
+	public function selectDataIsi($tabel_id = null)
+	{
+		$this->db->select('isi_value,baris_id,kolom_id');
+		$this->db->from('isi_data');
+		$this->db->where('tabel_id = ', $tabel_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function allData($tabel_id = null)
+	{
+		$this->db->select('isi_value,baris_id,kolom_id');
+		$this->db->from('isi_data');
+		$this->db->where('tabel_id = ', $tabel_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
