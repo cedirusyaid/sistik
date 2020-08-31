@@ -162,21 +162,18 @@ class tabel extends CI_Controller
 		$baris_col = $this->m_baris->getBarisAll($id);
 		$baris = $this->m_baris->json_baris($id);
 		$kolom = $this->m_kolom->json_kolom($id); 
-		$value = $this->m_tabel->json_value($id); 
 
 		$json_data = $this->m_tabel->getById($id);
-		$json_data->tahun = $tahun;
-
+		$json_data->tahun = $tahun;		
 
 		$json_table = ["Header" => $kolom, 
-						"Body" => $baris,
-						"Value" => $value
+						"Body" => array_chunk($baris, count($kolom))
 					];
 
 		$json['json_data'] = $json_data;
 		$json['json_table'] = $json_table;
 		
-
+		
 		echo json_encode($json);
 		// print_r($data);
 		// $this->load->view('tabel/detail', $data);

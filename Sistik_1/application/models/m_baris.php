@@ -97,10 +97,21 @@ class m_baris extends CI_Model
 
 	public function json_baris($tabel_id = null)
 	{
-		$this->db->select('baris_id,baris_nm,baris_induk');
-		$this->db->from('baris_data');
-		$this->db->where('tabel_id = ', $tabel_id);
+		$this->db->select('tabel_nm,baris_nm,kolom_nm,isi_value');
+		$this->db->from('tabel_data,kolom_data,baris_data,isi_data');
+		$this->db->where('tabel_data.tabel_id = ', $tabel_id);
+		$this->db->where('kolom_data.kolom_id = isi_data.kolom_id');
+		$this->db->where('baris_data.baris_id = isi_data.baris_id');
+		$this->db->where('isi_data.tabel_id = ', $tabel_id);
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	// public function json_baris($tabel_id = NULL)
+	// {
+			
+	// 	$query = $this->db->get('kolom_data');
+	// }
+
+
 }
