@@ -93,7 +93,8 @@ class tabel extends CI_Controller
 		}
 
 		$data['tahun'] = $tahun;
-		$data['tahun_awal']= $tahun - 5;
+		$data['tahun_awal']= $tahun - 3;
+		// $data['tahun_awal']= 2015;
 
 		$data['detail'] = $this->m_tabel->getById($id);
 		$data['baris'] = $this->m_baris->tabel_baris($id);
@@ -146,5 +147,35 @@ class tabel extends CI_Controller
 			endforeach;
 		endforeach;
 		header('Location: '. base_url('tabel/detail/'.$data_form['tabel_id'].'/'.$data_form['tahun']));
+	}
+
+	public function json($id = null, $tahun= null)
+	{
+		if ($tahun==null){
+			$tahun = date('Y');
+
+		}
+
+		$data['tahun'] = $tahun;
+		
+		$tabel_id = $id;
+		$baris_col = $this->m_baris->getBarisAll($id);
+		$baris = $this->m_baris->json_baris($id);
+		$kolom = $this->m_kolom->json_kolom($id); 
+
+		$json_data = $this->m_tabel->getById($id);
+		$json_data->tahun = $tahun;		
+
+		$json_table = ["Header" => $kolom, 
+						"Body" => array_chunk($baris, count($kolom))
+					];
+
+		$json['json_data'] = $json_data;
+		$json['json_table'] = $json_table;
+		
+		
+		echo json_encode($json);
+		// print_r($data);
+		// $this->load->view('tabel/detail', $data);
 	}
 }
