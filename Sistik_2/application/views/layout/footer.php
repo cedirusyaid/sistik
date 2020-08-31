@@ -53,7 +53,7 @@
  <script src="<?= base_url('asset/dist/js/pages/dashboard.js'); ?>"></script>
  <!-- AdminLTE for demo purposes -->
  <script src="<?= base_url('asset/dist/js/demo.js'); ?>"></script>
- <!-- <script>
+ <script>
  	$(document).ready(function() {
  		$("#table").DataTable({
  			autoWidth: false,
@@ -65,7 +65,7 @@
  		});
 
  	});
- </script> -->
+ </script>
  </body>
 
  </html>

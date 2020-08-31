@@ -57,7 +57,7 @@ $this->load->view('layout/sidebar.php');
 
 						<!-- /.card-header -->
 						<div class="card-body">
-							<table id="table" class="table table-bordered table-striped">
+							<table id="" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th>No</th>

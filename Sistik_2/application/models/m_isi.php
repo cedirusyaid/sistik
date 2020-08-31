@@ -48,10 +48,20 @@ class m_isi extends CI_Model
 
 	public function allData($tabel_id = null)
 	{
-		$this->db->select('isi_value,baris_id,kolom_id');
-		$this->db->from('isi_data');
-		$this->db->where('tabel_id = ', $tabel_id);
+		// $query =	$this->db->select('*')
+		// ->from('isi_data')
+		// ->join('tabel_data', 'tabel_data.tabel_id = isi_data.tabel_id')
+		// ->join('kolom_data', 'kolom_data.kolom_id = isi_data.kolom_id')
+		// ->join('baris_data', 'baris_data.tabel_id = tabel_data.tabel_id', 'left');\
+
+		$this->db->select('kolom_nm,baris_nm,isi_value');
+		$this->db->from('tabel_data,kolom_data,baris_data,isi_data');
+		$this->db->where('tabel_data.tabel_id = ', $tabel_id);
+		$this->db->where('kolom_data.kolom_id = isi_data.kolom_id');
+		$this->db->where('baris_data.baris_id = isi_data.baris_id');
+		$this->db->where('isi_data.tabel_id = ', $tabel_id);
 		$query = $this->db->get();
 		return $query->result();
 	}
+
 }

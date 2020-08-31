@@ -111,6 +111,7 @@ $this->load->view('layout/sidebar.php');
 	</div>
 </div>
 
+
 <?php $this->load->view('layout/footer'); ?>
 
 <script>

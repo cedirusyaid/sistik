@@ -159,17 +159,23 @@ class tabel extends CI_Controller
 		$baris = $this->m_baris->selectDataBaris($id);
 		$isi = $this->m_isi->selectDataIsi($id);
 		$value = $this->m_baris->value($id);
+		$all = $this->m_isi->allData($id);
+
+		$json_table = [
+			"Header" => $kolom,
+			"Body" => array_chunk($all, count($kolom))
+		];
 
 		$json_data = $this->m_tabel->getById($id);
 		$json_data->tahun = $tahun;
-		$json_table = [
-			"Header" => $kolom,
-			"Body" => $baris,
-			"Value" => $value
-		];
 
 		$json['json_data'] = $json_data;
 		$json['json_table'] = $json_table;
+		// $hasil = json_encode($json,JSON_PRETTY_PRINT);
 		echo json_encode($json);
+		// file_put_contents('statistik.json', $hasil);
+		// $fp = fopen('results.json', 'w');
+		// fwrite($fp, json_encode($json));
+		// fclose($fp);
 	}
 }

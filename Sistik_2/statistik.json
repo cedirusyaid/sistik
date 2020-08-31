@@ -1,0 +1,168 @@
+{
+    "json_data": {
+        "tabel_id": "7",
+        "tabel_nm": "Jumlah Kepemilikan Akta Kelahiran",
+        "unit_id": "730710",
+        "unit_nm": "Badan Penanggulangan Bencana Daerah",
+        "created": "2020-08-12 11:05:23",
+        "tahun": "2020"
+    },
+    "json_table": {
+        "Header": [
+            {
+                "kolom_id": "5",
+                "kolom_nm": "Memiliki",
+                "kolom_tipe": "Angka"
+            },
+            {
+                "kolom_id": "6",
+                "kolom_nm": "Tidak Memiliki",
+                "kolom_tipe": "Angka"
+            },
+            {
+                "kolom_id": "7",
+                "kolom_nm": "Jumlah Penduduk",
+                "kolom_tipe": "Angka"
+            },
+            {
+                "kolom_id": "8",
+                "kolom_nm": "Persentase",
+                "kolom_tipe": "Angka"
+            }
+        ],
+        "Body": [
+            [
+                {
+                    "kolom_nm": "Memiliki",
+                    "baris_nm": "Sinjai Selatan",
+                    "isi_value": "1"
+                },
+                {
+                    "kolom_nm": "Memiliki",
+                    "baris_nm": "Sinjai Utara",
+                    "isi_value": "5"
+                },
+                {
+                    "kolom_nm": "Memiliki",
+                    "baris_nm": "Sinjai Tengah",
+                    "isi_value": "9"
+                },
+                {
+                    "kolom_nm": "Memiliki",
+                    "baris_nm": "Sinjai Timur",
+                    "isi_value": ""
+                }
+            ],
+            [
+                {
+                    "kolom_nm": "Memiliki",
+                    "baris_nm": "Baris Tiga",
+                    "isi_value": "13"
+                },
+                {
+                    "kolom_nm": "Memiliki",
+                    "baris_nm": "baris",
+                    "isi_value": "99"
+                },
+                {
+                    "kolom_nm": "Tidak Memiliki",
+                    "baris_nm": "Sinjai Selatan",
+                    "isi_value": "2"
+                },
+                {
+                    "kolom_nm": "Tidak Memiliki",
+                    "baris_nm": "Sinjai Utara",
+                    "isi_value": "6"
+                }
+            ],
+            [
+                {
+                    "kolom_nm": "Tidak Memiliki",
+                    "baris_nm": "Sinjai Tengah",
+                    "isi_value": "10"
+                },
+                {
+                    "kolom_nm": "Tidak Memiliki",
+                    "baris_nm": "Sinjai Timur",
+                    "isi_value": ""
+                },
+                {
+                    "kolom_nm": "Tidak Memiliki",
+                    "baris_nm": "Baris Tiga",
+                    "isi_value": "14"
+                },
+                {
+                    "kolom_nm": "Tidak Memiliki",
+                    "baris_nm": "baris",
+                    "isi_value": "99"
+                }
+            ],
+            [
+                {
+                    "kolom_nm": "Jumlah Penduduk",
+                    "baris_nm": "Sinjai Selatan",
+                    "isi_value": "3"
+                },
+                {
+                    "kolom_nm": "Jumlah Penduduk",
+                    "baris_nm": "Sinjai Utara",
+                    "isi_value": "7"
+                },
+                {
+                    "kolom_nm": "Jumlah Penduduk",
+                    "baris_nm": "Sinjai Tengah",
+                    "isi_value": "11"
+                },
+                {
+                    "kolom_nm": "Jumlah Penduduk",
+                    "baris_nm": "Sinjai Timur",
+                    "isi_value": ""
+                }
+            ],
+            [
+                {
+                    "kolom_nm": "Jumlah Penduduk",
+                    "baris_nm": "Baris Tiga",
+                    "isi_value": "15"
+                },
+                {
+                    "kolom_nm": "Jumlah Penduduk",
+                    "baris_nm": "baris",
+                    "isi_value": "99"
+                },
+                {
+                    "kolom_nm": "Persentase",
+                    "baris_nm": "Sinjai Selatan",
+                    "isi_value": "4"
+                },
+                {
+                    "kolom_nm": "Persentase",
+                    "baris_nm": "Sinjai Utara",
+                    "isi_value": "8"
+                }
+            ],
+            [
+                {
+                    "kolom_nm": "Persentase",
+                    "baris_nm": "Sinjai Tengah",
+                    "isi_value": "12"
+                },
+                {
+                    "kolom_nm": "Persentase",
+                    "baris_nm": "Sinjai Timur",
+                    "isi_value": ""
+                },
+                {
+                    "kolom_nm": "Persentase",
+                    "baris_nm": "Baris Tiga",
+                    "isi_value": "16"
+                },
+                {
+                    "kolom_nm": "Persentase",
+                    "baris_nm": "baris",
+                    "isi_value": "99"
+                }
+            ]
+        ]
+    }
+}

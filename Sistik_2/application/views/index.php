@@ -38,4 +38,5 @@ $this->load->view('layout/sidebar.php');
 </div>
 <!-- /.content-wrapper -->
 
+
 <?php $this->load->view('layout/sidebar.php'); ?>

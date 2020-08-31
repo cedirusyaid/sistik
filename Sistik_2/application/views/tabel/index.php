@@ -61,6 +61,7 @@ $this->load->view('layout/sidebar.php');
 												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a> |
 												<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('tabel/hapus/' . $data['tabel_id']) ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
 											</td>
+											<td><a href="<?= site_url('tabel/tesData/' . $data['tabel_id']) ?>">Coba Tes Data</a></td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>
