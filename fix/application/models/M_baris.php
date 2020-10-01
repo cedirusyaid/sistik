@@ -32,14 +32,14 @@ class m_baris extends CI_Model
 		return $this->db->get($this->_table)->result_array();
 	}
 
-	public function getBarisAll($tabel_id = 0)
+	public function getBarisAll($jenis_id = 0)
 	{
 		$query = $this->db->query("
 
 			SELECT A.*,
 			(SELECT COUNT(B.baris_id) FROM baris_data B WHERE A.baris_id = B.baris_induk ) AS jumlah_anak
 			FROM baris_data A
-			WHERE A.tabel_id = $tabel_id
+			WHERE A.jenis_id = $jenis_id
 
 		");
 		return $query->result();

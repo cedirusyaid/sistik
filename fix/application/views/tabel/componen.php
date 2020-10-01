@@ -2,6 +2,7 @@
 $this->load->view('layout/header');
 
 $this->load->view('layout/sidebar.php');
+// print_r($tabel);
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -11,7 +12,7 @@ $this->load->view('layout/sidebar.php');
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Komponen <?= $tabel->tabel_nm; ?></h1>
+					<h1>Komponen <?= $tabel['tabel_nm']; ?></h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -140,7 +141,7 @@ $this->load->view('layout/sidebar.php');
 	<!-- /.content -->
 	<div class="text m-3">
 		<p class="text-monospace">
-			Untuk Melihat Nilai Baris dan Kolom Silahkan <a href="<?= base_url('tabel/detail/' . $tabel->tabel_id) ?>"> Klik Disini </a>
+			Untuk Melihat Nilai Baris dan Kolom Silahkan <a href="<?= base_url('tabel/detail/' . $tabel['tabel_id']) ?>"> Klik Disini </a>
 		</p>
 	</div>
 </div>
@@ -148,8 +149,8 @@ $this->load->view('layout/sidebar.php');
 
 <!-- Baris Section Modal -->
 <!-- Modal Tambah Baris-->
-<form action="<?= site_url('componen/add_baris/' . $tabel->tabel_id) ?>" method="post">
-	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
+<form action="<?= site_url('componen/add_baris/' . $tabel['tabel_id']) ?>" method="post">
+	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 	<div class="modal fade" id="addModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -190,7 +191,7 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Tambah Baris-->
 
 <!-- Modal Edit Baris-->
-<form action="<?= site_url('componen/edit_baris/' . $tabel->tabel_id) ?>" method="post">
+<form action="<?= site_url('componen/edit_baris/' . $tabel['tabel_id']) ?>" method="post">
 	<div class="modal fade" id="editModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -227,7 +228,7 @@ $this->load->view('layout/sidebar.php');
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
+					<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 					<input type="hidden" name="baris_id" class="form-control baris_id">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Save</button>
@@ -239,8 +240,8 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Edit Product-->
 
 <!-- Modal Delete Baris-->
-<form action="<?= site_url('componen/delete_baris/' . $tabel->tabel_id) ?>" method="post">
-	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
+<form action="<?= site_url('componen/delete_baris/' . $tabel['tabel_id']) ?>" method="post">
+	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 	<input type="hidden" name="baris_id" class="baris_id">
 
 	<div class="modal fade" id="deleteModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -268,8 +269,8 @@ $this->load->view('layout/sidebar.php');
 
 <!-- kolom Section Modal -->
 <!-- Modal Tambah kolom-->
-<form action="<?= site_url('componen/add_kolom/' . $tabel->tabel_id) ?>" method="post">
-	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
+<form action="<?= site_url('componen/add_kolom/' . $tabel['tabel_id']) ?>" method="post">
+	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 	<div class="modal fade" id="addModal-kolom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -301,7 +302,7 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Tambah kolom-->
 
 <!-- Modal Edit kolom-->
-<form action="<?= site_url('componen/edit_kolom/' . $tabel->tabel_id) ?>" method="post">
+<form action="<?= site_url('componen/edit_kolom/' . $tabel['tabel_id']) ?>" method="post">
 	<div class="modal fade" id="editModal-kolom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -323,7 +324,7 @@ $this->load->view('layout/sidebar.php');
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
+					<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 					<input type="hidden" name="kolom_id" class="form-control kolom_id">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Save</button>
@@ -335,8 +336,8 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Edit Product-->
 
 <!-- Modal Delete kolom-->
-<form action="<?= site_url('componen/delete_kolom/' . $tabel->tabel_id) ?>" method="post">
-	<input type="hidden" name="tabel_id" value="<?= $tabel->tabel_id; ?>">
+<form action="<?= site_url('componen/delete_kolom/' . $tabel['tabel_id']) ?>" method="post">
+	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 	<input type="hidden" name="kolom_id" class="kolom_id">
 
 	<div class="modal fade" id="deleteModal-kolom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

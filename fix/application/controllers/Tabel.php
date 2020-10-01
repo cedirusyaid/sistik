@@ -10,10 +10,18 @@ class Tabel extends CI_Controller
 		parent::__construct();
 		$this->load->model('m_tabel');
 		$this->load->model('m_baris');
+		$this->load->model('m_jenis');
 		$this->load->model('m_kolom');
 		$this->load->model('m_isi');
 		$this->load->library('form_validation');
 	}
+
+	private function get_unit() 
+	{
+		$url = "http://apps.sinjaikab.go.id/api/pegawai/get_unit";
+		$get_url = file_get_contents($url);
+		return json_decode($get_url);
+	}	
 
 	public function index()
 	{
@@ -24,13 +32,17 @@ class Tabel extends CI_Controller
 
 	public function add()
 	{
-		$url = "http://apps.sinjaikab.go.id/api/pegawai/get_unit";
-		$get_url = file_get_contents($url);
-		$data = json_decode($get_url);
 
-		$data_array = array(
-			'datalist' => $data
-		);
+		$data['unit'] = $this -> get_unit();
+
+
+		// $data['tabel'] = $this->m_tabel->getAll();
+
+		$data['jenis'] = $this->m_jenis->getAll();
+
+		// $data_array = array(
+		// 	'datalist' => $data
+		// );
 
 		$tabel = $this->m_tabel;
 		$validation = $this->form_validation;
@@ -41,21 +53,21 @@ class Tabel extends CI_Controller
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
 			redirect(site_url('tabel'));
 		}
-		$this->load->view('tabel/add', $data_array);
+		$this->load->view('tabel/add', $data);
 		// $this->load->view('tabel/add');
 	}
+
 
 	public function edit($id = null)
 	{
 		if (!isset($id)) redirect('tabel');
 
-		$url = "http://apps.sinjaikab.go.id/api/pegawai/get_unit";
-		$get_url = file_get_contents($url);
-		$data = json_decode($get_url);
+		$data_array['unit'] = $this -> get_unit();
 
-		$data_array = array(
-			'datalist' => $data
-		);
+		// $data['tabel'] = $this->m_tabel->getAll();
+
+		$data_array['jenis'] = $this->m_jenis->getAll();
+
 
 		$tabel = $this->m_tabel;
 		$validation = $this->form_validation;
