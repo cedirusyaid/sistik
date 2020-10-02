@@ -43,10 +43,7 @@ $this->load->view('layout/sidebar.php');
 								<?php
 								for ($i = 2015; $i <= date('Y'); $i++) { ?>
 									<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i) ?>" <?php
-																																													if ($i == $tahun) {
-																																														echo " selected";
-																																													}
-																																													?>>
+																																					?>>
 										<?= $i; ?>
 									</option>
 								<?php

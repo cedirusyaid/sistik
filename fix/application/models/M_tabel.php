@@ -83,4 +83,17 @@ class m_tabel extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function kategori_default($id = null)
+	{
+		$this->db->select('*');
+		$this->db->from('kategori_data');
+		$this->db->where('kategori_data.kategori_default = 1 ');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+
+
+
 }

@@ -57,6 +57,25 @@ $this->load->view('layout/sidebar.php');
 										</div>
 									</div>
 								</div>
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Data Yang ditampilkan</label>
+									<div class="col-sm-10">
+
+										<select class="form-control" placeholder="Tabel" name="kategori_id">
+										<option value="">- Pilih Kategori -</option>
+											<?php
+											foreach ($kategori_default as $row) :
+												?>
+													<option value="<?=$row->kategori_id?>"><?=$row->kategori_nama?></option>
+												<?php
+											endforeach;
+											?>
+										<option value="">Tambah Kategori</option>
+											
+										</select>
+
+									</div>
+								</div>
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">

@@ -38,6 +38,9 @@ $this->load->view('layout/sidebar.php');
 						<!-- /.card-header -->
 						<div class="card-body">
 							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i> Tambah Data</button>
+
+							
+
 							<table id="" class="table table-bordered table-striped">
 								<thead>
 									<tr>

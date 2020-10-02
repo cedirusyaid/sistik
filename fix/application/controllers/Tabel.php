@@ -26,11 +26,11 @@ class Tabel extends CI_Controller
 	{
 		$url = "http://apps.sinjaikab.go.id/api/pegawai/get_unit";
 		$get_url = file_get_contents($url);
-		$data = json_decode($get_url);
+		$unit = json_decode($get_url);
 
-		$data_array = array(
-			'datalist' => $data
-		);
+		$data['datalist'] = $unit;
+		$data['kategori_default'] = $this->m_tabel->kategori_default();
+
 
 		$tabel = $this->m_tabel;
 		$validation = $this->form_validation;
@@ -41,7 +41,7 @@ class Tabel extends CI_Controller
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
 			redirect(site_url('tabel'));
 		}
-		$this->load->view('tabel/add', $data_array);
+		$this->load->view('tabel/add', $data);
 		// $this->load->view('tabel/add');
 	}
 
@@ -179,4 +179,6 @@ class Tabel extends CI_Controller
 		// fwrite($fp, json_encode($json));
 		// fclose($fp);
 	}
+
+	
 }
