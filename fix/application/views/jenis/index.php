@@ -63,7 +63,7 @@ $this->load->view('layout/sidebar.php');
 											<td class="text-left" ><a href="<?= site_url('jenis/detail/' . $jAll['jenis_id']) ?>"><?= $jAll['jenis_ket']; ?></a></td>
 											<td  class="text-center" >
 												<!-- <a href="<?php echo site_url('componen/index/' . $jAll['jenis_id']) ?>" class="badge badge-success"><i class="fas fa-eye"></i></a> | -->
-												<!-- <a href="<?php echo site_url('jenis/edit/' . $jAll['jenis_id']) ?>" class="badge badge-warning"><i class="fas fa-edit"></i></a> | -->
+												<a href="<?php echo site_url('jenis/edit/' . $jAll['jenis_id']) ?>" class="badge badge-warning"><i class="fas fa-edit"></i></a> |
 												<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('jenis/hapus/' . $jAll['jenis_id']) ?>" class="badge badge-danger"><i class="fas fa-trash"></i></a>
 											</td>
 											<!-- <td><a href="<?= site_url('jenis/tesData/' . $jAll['jenis_id']) ?>">Coba Tes Data</a></td> -->

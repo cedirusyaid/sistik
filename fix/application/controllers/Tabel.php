@@ -7,7 +7,7 @@ class Tabel extends CI_Controller
 
 	public function __construct()
 	{
-		parent::__construct();
+		parent::__construct();	
 		$this->load->model('m_tabel');
 		$this->load->model('m_baris');
 		$this->load->model('m_jenis');
@@ -103,10 +103,13 @@ class Tabel extends CI_Controller
 		}
 
 		$data['tahun'] = $tahun;
+		$data['tabel'] = $tabel = $this->m_tabel->getById($id);
 
 		$data['baris_col'] = $this->m_baris->getBarisAll($id);
 		$data['detail'] = $this->m_tabel->getById($id);
-		$data['baris'] = $this->m_tabel->tabel_baris($id);
+		// $data['baris'] = $this->m_tabel->tabel_baris($id);
+		$data['baris_col'] = $this->m_baris->getBarisAll($tabel['jenis_id']);
+		$data['baris_induk'] = $this->m_baris->getBarisInduk($tabel['jenis_id']);
 		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
 		$data['tabel_id'] = $id;
 
@@ -184,11 +187,6 @@ class Tabel extends CI_Controller
 
 		$json['json_data'] = $json_data;
 		$json['json_table'] = $json_table;
-		// $hasil = json_encode($json,JSON_PRETTY_PRINT);
 		echo json_encode($json);
-		// file_put_contents('statistik.json', $hasil);
-		// $fp = fopen('results.json', 'w');
-		// fwrite($fp, json_encode($json));
-		// fclose($fp);
 	}
 }

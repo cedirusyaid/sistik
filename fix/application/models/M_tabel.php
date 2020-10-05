@@ -97,8 +97,6 @@ class m_tabel extends CI_Model
 
 	public function tabel_baris($id = null)
 	{
-
-
 			
 			$query  = $this->db->query("
 			SELECT A.*, B.*, C.*
@@ -109,6 +107,12 @@ class m_tabel extends CI_Model
 			ON B.tabel_id = C.tabel_id
 			ORDER BY A.tabel_nm
 			");
+			if ($query) {
+			return $query->result_array();
+			} else {
+				return array();
+			}
+
 
 	}
 

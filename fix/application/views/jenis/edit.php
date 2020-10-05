@@ -2,6 +2,8 @@
 $this->load->view('layout/header');
 
 $this->load->view('layout/sidebar.php');
+
+
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -37,19 +39,19 @@ $this->load->view('layout/sidebar.php');
 						</div>
 						<!-- /.card-header -->
 						<!-- form start -->
-						<form class="form-horizontal" action="<?= site_url('jenis/add') ?>" method="POST"> <div class="card-body">
+						<form class="form-horizontal" action="<?= site_url('jenis/edit/'.$jenis->jenis_id) ?>" method="POST"> <div class="card-body">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Jenis Data</label> <div class="col-sm-4">
-										<input type="text" class="form-control" placeholder="Jenis Data" name="jenis_nm"> </div>
+										<input type="text" class="form-control" name="jenis_nm" value="<?=$jenis->jenis_nm?>"> </div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Keterangan</label> <div class="col-sm-10">
-										<input type="text" class="form-control" placeholder="Keterangan" name="jenis_ket"> </div>
+										<input type="text" class="form-control" name="jenis_ket" value="<?=$jenis->jenis_ket?>"> </div>
 								</div>
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
-								<input type="hidden" class="form-control" value="0" name="jenis_id">
+								<input type="hidden" class="form-control" name="jenis_id" value="<?=$jenis->jenis_id?>"> </div>
 								<button type="submit" class="btn btn-info text-white">Kirim</button>
 							</div>
 							<!-- /.card-footer -->

@@ -32,7 +32,7 @@ $this->load->view('layout/sidebar.php');
 
 					<div class="card">
 						<div class="card-header text-center">
-							<h3 class="card-title"><?= $detail->tabel_nm; ?></h3>
+							<h3 class="card-title"><?= $detail['tabel_nm']; ?></h3>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
@@ -129,7 +129,7 @@ $this->load->view('layout/sidebar.php');
 	<!-- /.content -->
 	<div class="text m-3">
 		<p class="text-monospace">
-			Untuk Melihat Komponen Baris dan Kolom Silahkan <a href="<?= site_url('componen/index/' . $tabel_id) ?>"> Klik Disini </a>
+			Untuk Melihat Komponen Baris dan Kolom Silahkan <a href="<?= site_url('compt/index/' . $tabel_id) ?>"> Klik Disini </a>
 		</p>
 	</div>
 </div>
