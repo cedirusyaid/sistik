@@ -45,21 +45,29 @@ class m_baris extends CI_Model
 		return $query->result();
 	}
 
-	public function getBarisInduk($jenis_id = 0)
-	{
-		$query = $this->db->query("
+	// public function getBarisInduk($jenis_id = 0)
+	// {
+	// 	$query = $this->db->query("
 
-			SELECT B.*
-			FROM baris_data A
-				LEFT JOIN baris_data B
-				 ON A.baris_induk = B.baris_id
+	// 		SELECT A.*,
+	// 		(SELECT COUNT(C.baris_id) FROM baris_data C WHERE A.baris_id = C.baris_induk ) AS jumlah_anak
+	// 		FROM baris_data A
+	// 			LEFT JOIN baris_data B
+	// 			 ON A.baris_induk = B.baris_id
+	// 		WHERE B.jenis_id = '$jenis_id' or A.jenis_id = '$jenis_id' 
 
-			WHERE A.jenis_id = '$jenis_id' or B.jenis_id = '$jenis_id'
-			GROUP BY A.baris_induk
+	// 	");
+	// 	//	return $query -> row_array();
+	// 		return $query -> result();
 
-		");
-		return $query->result();
-	}
+
+
+
+
+
+
+
+	// }
 
 	public function getById($id)
 	{

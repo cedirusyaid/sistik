@@ -23,7 +23,7 @@ class Compt extends CI_Controller
 		// $data['baris_col'] = $this->m_baris->getById($id);
 
 		$data['baris_col'] = $this->m_baris->getBarisAll($tabel['jenis_id']);
-		$data['baris_induk'] = $this->m_baris->getBarisInduk($tabel['jenis_id']);
+		// $data['baris_induk'] = $this->m_baris->getBarisInduk($tabel['jenis_id']);
 
 
 
@@ -32,7 +32,8 @@ class Compt extends CI_Controller
 		$data['coba'] = $this->m_baris->getById($id);
 		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
 		
-print_r($data);
+		// print_r($data['tabel']);
+		// print_r($data['baris_col']);
 
 		$this->load->view('tabel/compt', $data);
 	}
@@ -105,6 +106,7 @@ print_r($data);
 		$baris = $this->m_baris;
 		$id = $this->input->post('baris_id');
 		$baris->delete($id);
+		echo $id;
 		redirect(site_url('compt/index/' . $idi));
 	}
 
