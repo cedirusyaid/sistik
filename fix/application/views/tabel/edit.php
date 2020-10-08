@@ -2,6 +2,7 @@
 $this->load->view('layout/header');
 
 $this->load->view('layout/sidebar.php');
+// print_r($unit);
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -39,25 +40,52 @@ $this->load->view('layout/sidebar.php');
 						<!-- form start -->
 						<form class="form-horizontal" method="POST">
 							<div class="card-body">
-								<input type="hidden" name="id" value="<?= $tabel->tabel_id; ?>">
+								<input type="hidden" name="id" value="<?= $tabel['tabel_id']; ?>">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Tabel</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="tabel_nm" value="<?= $tabel->tabel_nm; ?>">
+										<input type="text" class="form-control" name="tabel_nm" value="<?= $tabel['tabel_nm']; ?>">
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Nama Unit</label>
-									<div class="col-sm-10">
-										<div class="input-group">
-											<input type="text" class="form-control mr-4 col-sm-3" id="unit_id" name="unit_id" value="<?= $tabel->unit_id ?>" readonly>
-											<input type="text" class="form-control mr-4 col-sm-7" id="unit_nm" name="unit_nm" value="<?= $tabel->unit_nm; ?>" readonly>
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-info btn-flat ml-4 btn-browse" data-toggle="modal" data-target="#modal">Browse</button>
-											</span>
-										</div>
+									<label class="col-sm-2 col-form-label">Jenis Data</label>
+									<div class="col-sm-6">
+										<select  class="form-control" name="jenis_id" required="">
+											<option class="form-control" value="">Pilih Jenis Data</option>
+											<?php
+											foreach ($jenis as $jns) {
+												?>
+												<option class="form-control" value="<?=$jns['jenis_id']?>"
+												<?php
+												if($jns['jenis_id'] == $tabel['jenis_id']) {echo 'selected';}
+												?>
+													><?=$jns['jenis_nm']." (".$jns['jenis_ket'].")"?></option>
+												<?php
+											}
+											?>
+										</select>
 									</div>
-								</div>
+								</div>								
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">OPD</label>
+									<div class="col-sm-6">
+										<select  class="form-control" name="unit_id" required="">
+											<option class="form-control" value="">Pilih OPD</option>
+											<?php
+											foreach ($unit as $unt) {
+												?>
+												<option class="form-control" value="<?=$unt->unit_id?>"
+												<?php
+												if($unt->unit_id == $tabel['unit_id']) {echo 'selected';}
+												?>
+													><?=$unt->unit_nama?></option>
+												<?php
+											}
+											?>
+										</select>
+									</div>
+								</div>								
+								
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">

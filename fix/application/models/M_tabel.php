@@ -8,7 +8,7 @@ class m_tabel extends CI_Model
 
 	public $tabel_nm;
 	public $unit_id;
-	public $unit_nm;
+	public $jenis_id;
 
 	public function rules()
 	{
@@ -24,21 +24,51 @@ class m_tabel extends CI_Model
 				'rules' => 'required'
 			],
 			[
-				'field' => 'unit_nm',
-				'label' => 'unit_nm',
+				'field' => 'jenis_id',
+				'label' => 'jenis_id',
 				'rules' => 'required'
-			],
+			]
+			// ,
+			// [
+			// 	'field' => 'unit_nm',
+			// 	'label' => 'unit_nm',
+			// 	'rules' => 'required'
+			// ]
 		];
 	}
 
 	public function getAll()
 	{
-		return $this->db->get($this->_table)->result_array();
+
+
+			
+			$query  = $this->db->query("
+			SELECT A.*, B.*
+			FROM tabel_data A
+			LEFT JOIN jenis_data B
+			ON A.jenis_id = B.jenis_id
+			ORDER BY A.tabel_nm
+			");
+
+			return $query->result_array();
+
+		// return $this->db->get($this->_table)->result_array();
 	}
 
 	public function getById($id)
 	{
-		return $this->db->get_where($this->_table, ["tabel_id" => $id])->row();
+
+			$query  = $this->db->query("
+			SELECT A.*, B.*
+			FROM tabel_data A
+			LEFT JOIN jenis_data B
+			ON A.jenis_id = B.jenis_id
+			WHERE A.tabel_id = $id
+			ORDER BY A.tabel_nm
+			");
+
+			return $query->row_array();		
+
 	}
 
 	public function save()
@@ -46,7 +76,8 @@ class m_tabel extends CI_Model
 		$post = $this->input->post();
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
-		$this->unit_nm = $post["unit_nm"];
+		$this->jenis_id = $post["jenis_id"];
+		// print_r($post);
 		return $this->db->insert($this->_table, $this);
 	}
 
@@ -55,7 +86,7 @@ class m_tabel extends CI_Model
 		$post = $this->input->post();
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
-		$this->unit_nm = $post["unit_nm"];
+		$this->jenis_id = $post["jenis_id"];
 		return $this->db->update($this->_table, $this, array('tabel_id' => $post['id']));
 	}
 
@@ -66,12 +97,19 @@ class m_tabel extends CI_Model
 
 	public function tabel_baris($id = null)
 	{
-		$this->db->select('*');
-		$this->db->from('baris_data');
-		$this->db->join('tabel_data', 'baris_data.tabel_id = tabel_data.tabel_id');
-		$this->db->where('tabel_data.tabel_id = ',$id);
-		$query = $this->db->get();
-		return $query->result();
+
+
+			
+			$query  = $this->db->query("
+			SELECT A.*, B.*, C.*
+			FROM baris_data A
+			LEFT JOIN jenis_data B
+			ON A.jenis_id = B.jenis_id
+			LEFT JOIN tabel_data C
+			ON B.tabel_id = C.tabel_id
+			ORDER BY A.tabel_nm
+			");
+
 	}
 
 	public function tabel_kolom($id = null)

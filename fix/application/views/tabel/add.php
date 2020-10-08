@@ -2,6 +2,8 @@
 $this->load->view('layout/header');
 
 $this->load->view('layout/sidebar.php');
+											// print_r($unit);
+
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -42,19 +44,42 @@ $this->load->view('layout/sidebar.php');
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Tabel</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" placeholder="Tabel" name="tabel_nm">
+										<input type="text" class="form-control" placeholder="Tabel" name="tabel_nm" required="">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Jenis Data</label>
+									<div class="col-sm-6">
+										<select  class="form-control" name="jenis_id" required="">
+											<option class="form-control" value="">Pilih Jenis Data</option>
+											<?php
+											foreach ($jenis as $jns) {
+												?>
+												<option class="form-control" value="<?=$jns['jenis_id']?>"><?=$jns['jenis_nm']." (".$jns['jenis_ket'].")"?></option>
+												<?php
+											}
+											?>
+										</select>
 									</div>
 								</div>
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">Nama Unit</label>
 									<div class="col-sm-10">
-										<div class="input-group">
-											<input type="text" class="form-control mr-4 col-sm-3" id="unit_id" name="unit_id" placeholder="Unit ID" readonly>
-											<input type="text" class="form-control mr-4 col-sm-7" id="unit_nm" name="unit_nm" placeholder="Nama Unit" readonly>
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-info btn-flat ml-4 btn-browse" data-toggle="modal" data-target="#modal">Browse</button>
-											</span>
-										</div>
+
+									<select  class="form-control" name="unit_id" required="">
+											<option class="form-control" value="">Pilih OPD</option>
+											<?php
+											foreach ($unit as $unt) {
+												?>
+												<option class="form-control" value="<?=$unt->unit_id?>"
+			
+													><?=$unt->unit_nama?></option>
+												<?php
+											}
+											?>
+										</select>
+
+
 									</div>
 								</div>
 								<div class="form-group row">
@@ -79,7 +104,7 @@ $this->load->view('layout/sidebar.php');
 							</div>
 							<!-- /.card-body -->
 							<div class="card-footer">
-								<button type="submit" class="btn btn-info text-white">Kirim</button>
+								<button type="submit" class="btn btn-info text-white">Input</button>
 							</div>
 							<!-- /.card-footer -->
 						</form>

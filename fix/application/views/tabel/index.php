@@ -42,7 +42,8 @@ $this->load->view('layout/sidebar.php');
 									<tr>
 										<th class="text-center">No.</th>
 										<th class="text-center">Tabel</th>
-										<th class="text-center">Nama Unit</th>
+										<!-- <th class="text-center">Nama Unit</th> -->
+										<th class="text-center">Jenis</th>
 										<th class="text-center">Aksi</th>
 									</tr>
 								</thead>
@@ -56,13 +57,14 @@ $this->load->view('layout/sidebar.php');
 										<tr>
 											<td scope="row"><?= $no . "."; ?></td>
 											<td><a href="<?= site_url('tabel/detail/' . $data['tabel_id']) ?>"><?= $data['tabel_nm']; ?></a></td>
-											<td><?= $data['unit_nm']; ?></td>
+											<!-- <td><?= $data['unit_nm']; ?></td> -->
+											<td><?= $data['jenis_nm']; ?></td>
 											<td>
-												<a href="<?php echo site_url('componen/index/' . $data['tabel_id']) ?>" class="btn btn-success"><i class="fas fa-eye"></i></a> |
-												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a> |
-												<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('tabel/hapus/' . $data['tabel_id']) ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+												<a href="<?php echo site_url('componen/index/' . $data['tabel_id']) ?>" class="badge badge-success"><i class="fas fa-eye"></i></a> |
+												<a href="<?php echo site_url('tabel/edit/' . $data['tabel_id']) ?>" class="badge badge-warning"><i class="fas fa-edit"></i></a> |
+												<a onclick="javascript: return confirm('Anda Yakin Ingin Menghapus Data Ini ?') " href="<?= site_url('tabel/hapus/' . $data['tabel_id']) ?>" class="badge badge-danger"><i class="fas fa-trash"></i></a>
 											</td>
-											<td><a href="<?= site_url('tabel/tesData/' . $data['tabel_id']) ?>">Coba Tes Data</a></td>
+											<!-- <td><a href="<?= site_url('tabel/tesData/' . $data['tabel_id']) ?>">Coba Tes Data</a></td> -->
 										</tr>
 									<?php endforeach ?>
 								</tbody>
