@@ -109,10 +109,13 @@ class Tabel extends CI_Controller
 			$tahun = date('Y');
 		}
 
+
+		$data['edit'] = $edit = $this->input->get('edit');
+
 		$data['tahun'] = $tahun;
 		$data['tabel'] = $tabel = $this->m_tabel->getById($id);
 
-		$data['baris_col'] = $this->m_baris->getBarisAll($id);
+		// $data['baris_col'] = $this->m_baris->getBarisAll($id);
 		$data['detail'] = $this->m_tabel->getById($id);
 		// $data['baris'] = $this->m_tabel->tabel_baris($id);
 		$data['baris_col'] = $this->m_baris->getBarisAll($tabel['jenis_id']);
@@ -124,34 +127,37 @@ class Tabel extends CI_Controller
 		$this->load->view('tabel/detail', $data);
 	}
 
-	public function edit_detail($id = 0, $tahun = 0)
-	{
-		if ($tahun == null) {
-			$tahun = date('Y');
-		}
+	// public function edit_detail($id = 0, $tahun = 0)
+	// {
+	// 	if ($tahun == null) {
+	// 		$tahun = date('Y');
+	// 	}
 
-		$data['tahun'] = $tahun;
-		// $data['tahun_awal'] = $tahun - 5;
+	// 	$data['tahun'] = $tahun;
+	// 	// $data['tahun_awal'] = $tahun - 5;
 
-		$data['detail'] = $this->m_tabel->getById($id);
-		$data['baris_col'] = $this->m_baris->getBarisAll($id);
-		$data['baris'] = $this->m_tabel->tabel_baris($id);
-		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
-		$data['tabel_id'] = $id;
+	// 	$data['detail'] = $this->m_tabel->getById($id);
+	// 	$data['baris_col'] = $this->m_baris->getBarisAll($id);
+	// 	$data['baris'] = $this->m_tabel->tabel_baris($id);
+	// 	$data['kolom'] = $this->m_tabel->tabel_kolom($id);
+	// 	$data['tabel_id'] = $id;
 
-		// print_r($data);
-		$this->load->view('tabel/edit_detail', $data);
-	}
+	// 	// print_r($data);
+	// 	$this->load->view('tabel/edit_detail', $data);
+	// }
 
 	public function proses_detail()
 	{
 
 		$data = $this->input->post();
-		// print_r($data);
+		print_r($data);
 
 		$data_form['tahun'] = $this->input->post('tahun');
-		$data_form['tabel_id'] = $this->input->post('tabel_id');
-		$baris = $this->m_tabel->tabel_baris($data_form['tabel_id']);
+		$data_form['tabel_id'] = $tabel_id = $this->input->post('tabel_id');
+
+		$tabel = $this->m_tabel->getById($tabel_id);
+
+		$baris = $this->m_baris->getBarisAll($tabel['jenis_id']);
 		$kolom = $this->m_tabel->tabel_kolom($data_form['tabel_id']);
 
 		foreach ($baris as $brs) :

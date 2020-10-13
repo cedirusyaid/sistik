@@ -33,16 +33,28 @@ $this->load->view('layout/sidebar.php');
 					<div class="card">
 						<div class="card-header text-center">
 							<h1 class="card-title"><?= $detail['tabel_nm']; ?></h1>
-							<a href="<?= base_url('tabel/edit_detail/' . $tabel_id) . '/' . $tahun ?>" class="btn btn-outline-primary float-right">
+							<?php
+								if ($edit != 1) {
+							?>
+							<a href="<?= base_url('tabel/detail/' . $tabel_id) . '/' . $tahun.'?edit=1' ?>" class="btn btn-outline-primary float-right">
 								<i class="fas fa-edit"></i>
 							</a>
+							<?php
+							} else {
+							?>
+							<a href="<?= base_url('tabel/detail/' . $tabel_id) . '/' . $tahun ?>" class="btn btn-outline-primary float-right">
+								batal</i>
+							</a>
+							<?php
+							}
+						?>
 						</div>
 						<div class="card-header">
 							<h3 class="card-title col-md-2">Tahun </h3>
 							<select class="col-md-2 form-control" name="" id="" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
 								<?php
 								for ($i = 2015; $i <= date('Y'); $i++) { ?>
-									<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i) ?>" <?php
+									<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i.'?edit='.$edit) ?>" <?php
 									if ($i==$tahun) {
 										echo "selected";
 									}
@@ -56,6 +68,17 @@ $this->load->view('layout/sidebar.php');
 
 					<!-- /.card-header -->
 					<div class="card-body">
+
+						<?php
+						if ($edit == 1) {
+							?>
+							<form action="<?= base_url('tabel/proses_detail/') ?>" method="post">
+							<input type="hidden" name="tahun" value="<?= $tahun ?>">
+							<input type="hidden" name="tabel_id" value="<?= $tabel_id ?>">
+															
+							<?php
+							}
+						?>
 						<table id="" class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -96,7 +119,26 @@ $this->load->view('layout/sidebar.php');
 														$value = "";
 													}
 													?>
-													<td><?= $value  ?></td>
+													<td>
+
+													<?php
+													if ($edit == 1) {
+														?>
+														<input type="<?php if ($b1->jumlah_anak == 0) {
+																echo "text";
+															} else if ($b1->jumlah_anak > 0) {
+																echo "hidden";
+															} ?>" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $b1->baris_id; ?>" value="<?= $value  ?>">
+														<?php
+														} else {
+															echo $value;
+														}
+													?>
+
+															
+
+
+														</td>
 												<?php endforeach
 												?>
 												
@@ -121,7 +163,21 @@ $this->load->view('layout/sidebar.php');
 															$value = "";
 														}
 														?>
-														<td><?= $value  ?></td>
+														<td>
+														<?php
+														if ($edit == 1) {
+															?>
+															<input type="<?php if ($b2->jumlah_anak == 0) {
+																	echo "text";
+																} else if ($b2->jumlah_anak > 0) {
+																	echo "hidden";
+																} ?>" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $b2->baris_id; ?>" value="<?= $value  ?>">
+														<?php
+														} else {
+															echo $value;
+														}
+													?>
+															</td>
 													<?php endforeach
 													?>
 												</tr>
@@ -136,6 +192,17 @@ $this->load->view('layout/sidebar.php');
 								?>
 							</tbody>
 						</table>
+						<?php
+						if ($edit == 1) {
+							?>
+							<div class="d-flex justify-content-center">
+								<button type="submit" value="" class="btn btn-outline-primary"> <i class="fas fa-save"></i> Save</button>
+							</div>
+
+							</form>									
+							<?php
+							}
+						?>
 					</div>
 					<!-- /.card-body -->
 				</div>

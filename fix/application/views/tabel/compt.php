@@ -38,20 +38,19 @@ $this->load->view('layout/sidebar.php');
 				<div class="col-md-6 col-sm-12" >
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">Baris Data <?= $tabel['jenis_nm']; ?></h3>
+							<h3 class="card-title">Jenis Data</h3>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
 							<div class="float-right">
 							</div>
-								
-							<button type="button" class="btn btn-primary mb-4 float-right" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i><!--  Tambah Baris --></button>
+							<a type  = "botton" href="<?=base_url('jenis/detail/'.$tabel['jenis_id'])?>" class="btn btn-primary mb-4 float-right" target="_blank"><i class="fas fa-edit"></i>
+							</a>
 							<table id="" class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<!-- <th class="text-center">No.</th> -->
-										<th class="text-center">Nama Baris</th>
-										<th class="text-center" width="20%">Aksi</th>
+										<th class="text-center"><?=$tabel['jenis_nm']?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -75,15 +74,7 @@ $this->load->view('layout/sidebar.php');
 											?>
 											<tr>
 												<td class="text-left"><?=$b1->baris_nm?></td>
-												<td class="text-center">
-
-													<?php if($b1->jumlah_anak<1) { ?>
-													<button data-toggle="modal" class="badge btn-info btn-sm btn-edit-baris" data-id="<?= $b1->baris_id; ?>" data-name="<?= $b1->baris_nm; ?>"><i class="fas fa-edit"></i></button>
-													<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-id="<?= $b1->baris_id; ?>"><i class="fas fa-trash"></i></button>
-													<?php } ?>
-
-
-												</td>
+									
 											</tr>
 											<?php
 										}
@@ -95,15 +86,7 @@ $this->load->view('layout/sidebar.php');
 													?>
 													<tr>
 														<td class="text-left"><li><?=$b2->baris_nm."   ".$b2->jumlah_anak?></li></td>
-														<td class="text-center">
-
-															<?php if($b2->jumlah_anak<1) { ?>
-															<button data-toggle="modal" class="badge btn-info btn-sm btn-edit-baris" data-id="<?= $b2->baris_id; ?>" data-name="<?= $b2->baris_nm; ?>"><i class="fas fa-edit"></i></button>
-															<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-id="<?= $b2->baris_id; ?>"><i class="fas fa-trash"></i></button>
-															<?php } ?>
-
-
-														</td>
+				
 													</tr>
 													<?php
 												}
@@ -179,127 +162,6 @@ $this->load->view('layout/sidebar.php');
 	</div>
 </div>
 <!-- /.content-wrapper -->
-
-<!-- Baris Section Modal -->
-<!-- Modal Tambah Baris-->
-<form action="<?= site_url('compt/add_baris/' . $tabel['tabel_id']) ?>" method="post">
-	<!-- <input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>"> -->
-	<div class="modal fade" id="addModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Tambah Baris</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Baris Induk</label>
-						<div class="dropdown bootstrap-select dropdown w-100">
-							<select class="form-control" name="baris_induk" required="">
-								<option value="0">Pilih Baris Induk</option>
-								<?php
-								foreach ($baris_col as $data) :
-									if ($data->baris_induk == 0) { ?>
-										<option value="<?= $data->baris_id ?>"><?= $data->baris_nm ?></option>
-								<?php };
-								endforeach ?>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label>Nama Baris</label>
-						<input type="text" class="form-control" name="baris_nm" placeholder="Nama Baris">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<input type="hidden" name="jenis_id" value="<?= $tabel['jenis_id']; ?>">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-<!-- End Modal Tambah Baris-->
-
-<!-- Modal Edit Baris-->
-<form action="<?= site_url('compt/edit_baris/' . $tabel['tabel_id']) ?>" method="post">
-	<div class="modal fade" id="editModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Baris Induk</label>
-						<div class="dropdown bootstrap-select dropdown w-100">
-							<select class="form-control" name="baris_induk">
-								<option value="1">Baris Induk</option>
-								<option value="0">Baris Induk - Anak</option>
-								<?php
-								foreach ($baris as $data2) :
-									if ($data2->baris_induk == 0 and $data2->baris_induk !== $data2->baris_id) { ?>
-										<option value="<?= $data2->baris_id ?>" <?php if ($data2->baris_id !== $data2->baris_induk) {
-																															echo "selected";
-																														}
-																														?>>
-											<?= $data2->baris_nm ?>
-										</option>
-								<?php };
-								endforeach ?>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label>Nama Baris</label>
-						<input type="text" class="form-control baris_nm" name="baris_nm" placeholder="Nama Baris">
-					</div>
-				</div>
-				<div class="modal-footer">
-					<input type="hidden" name="jenis_id" value="<?= $tabel['jenis_id']; ?>">
-					<!-- <input type="hidden" name="baris_id" class="form-control baris_id"> -->
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-<!-- End Modal Edit Product-->
-
-<!-- Modal Delete Baris-->
-<form action="<?= site_url('compt/delete_baris/' . $tabel['tabel_id']) ?>" method="post">
-	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
-	<input type="hidden" name="baris_id" value="<?= $tabel['jenis_id']; ?>">
-
-	<div class="modal fade" id="deleteModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<h4>Apakah Anda Ingin Menghapus Baris ini ?</h4>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-					<button type="submit" class="btn btn-primary">Yes</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-<!-- End Modal Delete Baris -->
-<!-- End Baris Section Modal -->
 
 <!-- kolom Section Modal -->
 <!-- Modal Tambah kolom-->
@@ -403,28 +265,7 @@ $this->load->view('layout/footer');
 <script>
 	$(document).ready(function() {
 
-		// get Edit Baris
-		$('.btn-edit-baris').on('click', function() {
-			// get data from button edit
-			const id = $(this).data('id');
-			const name = $(this).data('name');
-			// Set data to Form Edit
-			$('.baris_id').val(id);
-			$('.baris_nm').val(name);
-			// Call Modal Edit
-			$('#editModal-baris').modal('show');
-		});
-
-		// get Delete Baris
-		$('.btn-delete-baris').on('click', function() {
-			// get data from button edit
-			const id = $(this).data('id');
-			// Set data to Form Edit
-			$('.baris_id').val(id);
-			// Call Modal Edit
-			$('#deleteModal-baris').modal('show');
-		});
-
+	
 		// get Edit Kolom
 		$('.btn-edit-kolom').on('click', function() {
 			// get data from button edit

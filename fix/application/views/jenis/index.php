@@ -60,10 +60,10 @@ $this->load->view('layout/sidebar.php');
 										<tr>
 											<td  class="text-center" scope="row"><?= $no . "."; ?></td>
 											<td  class="text-left" >
-												<!-- <a href="<?= site_url('jenis/detail/' . $jAll['jenis_id']) ?>"> -->
+												<a href="<?= site_url('jenis/detail/' . $jAll['jenis_id']) ?>">
 												<?= $jAll['jenis_nm']; ?>
 													
-												<!-- </a> -->
+												</a>
 											</td>
 											<td class="text-left" >
 												<!-- <a href="<?= site_url('jenis/detail/' . $jAll['jenis_id']) ?>"> -->
