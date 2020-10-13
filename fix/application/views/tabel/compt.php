@@ -35,21 +35,17 @@ $this->load->view('layout/sidebar.php');
 			<div class="row">
 
 				<!-- Baris -->
-				<div class="col-6">
+				<div class="col-md-6 col-sm-12" >
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">Baris Data <?= $tabel['jenis_nm']; ?></h3>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
-<<<<<<< HEAD:fix/application/views/tabel/componen.php
-							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i> Tambah Data</button>
-
-							
-
-=======
-							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i> Tambah Baris</button>
->>>>>>> be7cb2c58daff0504a3bae9cbf4f5e73007f5534:fix/application/views/tabel/compt.php
+							<div class="float-right">
+							</div>
+								
+							<button type="button" class="btn btn-primary mb-4 float-right" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i><!--  Tambah Baris --></button>
 							<table id="" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -128,15 +124,16 @@ $this->load->view('layout/sidebar.php');
 				</div>
 
 				<!-- Kolom -->
-				<div class="col-6">
+				<div class="col-md-6  col-sm-12">
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">Kolom Data</h3>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
-							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-kolom"><i class="fas fa-plus"></i> Tambah Kolom</button>
-							<table id="table1" class="table table-bordered table-striped">
+							<button type="button" class="btn btn-primary mb-4 float-right" data-toggle="modal" data-target="#addModal-kolom"><i class="fas fa-plus"></i> <!-- Tambah Kolom --></button>
+
+							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th class="text-center">No.</th>
