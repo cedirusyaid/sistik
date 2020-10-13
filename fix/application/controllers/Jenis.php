@@ -42,31 +42,26 @@ class Jenis extends CI_Controller
 
 	public function edit($id = null)
 	{
-		if (!isset($id)) redirect('tabel');
+		if (!isset($id)) redirect('jenis');
 
-		$url = "http://apps.sinjaikab.go.id/api/pegawai/get_unit";
-		$get_url = file_get_contents($url);
-		$data = json_decode($get_url);
 
-		$data_array = array(
-			'datalist' => $data
-		);
-
-		$tabel = $this->m_jenis;
+		$jenis = $this->m_jenis;
 		$validation = $this->form_validation;
-		$validation->set_rules($tabel->rules());
+		$validation->set_rules($jenis->rules());
 
 		if ($validation->run()) {
-			$tabel->update();
+			$jenis->update();
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
 			redirect(site_url('jenis'));
 		}
 
-		$data['tabel'] = $tabel->getById($id);
-		if (!$data['tabel']) show_404();
+		$data['jenis'] = $jenis->getById($id);
+		if (!$data['jenis']) show_404();
 
-		$this->load->vars($data);
-		$this->load->view('jenis/edit', $data_array);
+		// print_r($data);
+
+		// $this->load->vars($data);
+		$this->load->view('jenis/edit', $data);
 		// $this->load->view('jenis/edit', $data_array);
 	}
 
@@ -74,7 +69,7 @@ class Jenis extends CI_Controller
 	{
 		if (!isset($id)) show_404();
 
-		if ($this->m_jenis->delete($id) and $this->m_baris->delete_All($id) and $this->m_kolom->delete_all($id)) {
+		if ($this->m_jenis->delete($id)) {
 			redirect(site_url('jenis'));
 		}
 	}
@@ -89,32 +84,35 @@ class Jenis extends CI_Controller
 
 		$data['baris_col'] = $this->m_baris->getBarisAll($id);
 		$data['detail'] = $this->m_jenis->getById($id);
-		$data['baris'] = $this->m_jenis->tabel_baris($id);
-		$data['kolom'] = $this->m_jenis->tabel_kolom($id);
+		$data['baris'] = $this->m_jenis->getJenisAll($id);
+		$data['kolom'] = $this->m_jenis->getAll($id);
 		$data['tabel_id'] = $id;
 
 		// print_r($data);
 		$this->load->view('jenis/detail', $data);
 	}
 
-	public function edit_detail($id = 0, $tahun = 0)
-	{
-		if ($tahun == null) {
-			$tahun = date('Y');
-		}
 
-		$data['tahun'] = $tahun;
-		// $data['tahun_awal'] = $tahun - 5;
+	// public function edit_detail($id = 0, $tahun = 0)
+	// {
+	// 	if ($tahun == null) {
+	// 		$tahun = date('Y');
+	// 	}
 
-		$data['detail'] = $this->m_jenis->getById($id);
-		$data['baris_col'] = $this->m_baris->getBarisAll($id);
-		$data['baris'] = $this->m_jenis->tabel_baris($id);
-		$data['kolom'] = $this->m_jenis->tabel_kolom($id);
-		$data['tabel_id'] = $id;
+	// 	$data['tahun'] = $tahun;
+	// 	// $data['tahun_awal'] = $tahun - 5;
 
-		// print_r($data);
-		$this->load->view('jenis/edit_detail', $data);
-	}
+	// 	$data['detail'] = $this->m_jenis->getById($id);
+	// 	$data['baris_col'] = $this->m_baris->getBarisAll($id);
+	// 	$data['baris'] = $this->m_jenis->getJenisAll($id);
+	// 	// $data['baris'] = $this->m_jenis->tabel_baris($id);
+	// 	$data['kolom'] = $this->m_jenis->getAll($id);
+	// 	// $data['kolom'] = $this->m_jenis->tabel_kolom($id);
+	// 	$data['tabel_id'] = $id;
+
+	// 	// print_r($data);
+	// 	$this->load->view('jenis/edit_detail', $data);
+	// }
 
 	public function proses_detail()
 	{

@@ -4,7 +4,7 @@ use phpDocumentor\Reflection\Types\Null_;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Componen extends CI_Controller
+class Compt extends CI_Controller
 {
 
 	public function __construct()
@@ -18,26 +18,41 @@ class Componen extends CI_Controller
 
 	public function index($id = null)
 	{
+		$data['tabel'] = $tabel = $this->m_tabel->getById($id);
 		$data['baris'] = $this->m_tabel->tabel_baris($id);
 		// $data['baris_col'] = $this->m_baris->getById($id);
-		$data['baris_col'] = $this->m_baris->getBarisAll($id);
+
+		$data['baris_col'] = $this->m_baris->getBarisAll($tabel['jenis_id']);
+		// $data['baris_induk'] = $this->m_baris->getBarisInduk($tabel['jenis_id']);
+
+
+
+
+
 		$data['coba'] = $this->m_baris->getById($id);
 		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
-		$data['tabel'] = $this->m_tabel->getById($id);
 		
-		$this->load->view('tabel/componen', $data);
+		// print_r($data['tabel']);
+		// print_r($data['baris_col']);
+
+		$this->load->view('tabel/compt', $data);
 	}
 
 	public function add_baris($id = null)
 	{
+
+		// $dataform = $this->input->post();
+		// print_r($dataform);
+
 		$baris = $this->m_baris;
 		$validation = $this->form_validation;
 		$validation->set_rules($baris->rules());
 
+		// print_r($baris);
 		if ($validation->run()) {
 			$baris->save();
-			$this->session->set_flashdata('success', 'Berhasil disimpan');
-			redirect(site_url('componen/index/' . $id));
+			$this->session->set_flashdata('success', 'Berhasil disimpan', 'ERROR');
+			redirect(site_url('compt/index/' . $id));
 		}
 	}
 
@@ -50,7 +65,7 @@ class Componen extends CI_Controller
 		if ($validation->run()) {
 			$kolom->save();
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
-			redirect(site_url('componen/index/' . $id));
+			redirect(site_url('compt/index/' . $id));
 		}
 	}
 
@@ -63,7 +78,7 @@ class Componen extends CI_Controller
 		if ($validation->run()) {
 			$baris->update();
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
-			redirect(site_url('componen/index/' . $id));
+			redirect(site_url('compt/index/' . $id));
 		}
 	}
 
@@ -76,13 +91,13 @@ class Componen extends CI_Controller
 		if ($validation->run()) {
 			$kolom->update();
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
-			redirect(site_url('componen/index/' . $id));
+			redirect(site_url('compt/index/' . $id));
 		}
 
 		$data['kolom'] = $kolom->getById($id);
 		if (!$data['kolom']) show_404();
 
-		$this->load->view('componen', $data);
+		$this->load->view('compt', $data);
 		// $this->load->view('tabel/edit', $data_array);
 	}
 
@@ -91,7 +106,8 @@ class Componen extends CI_Controller
 		$baris = $this->m_baris;
 		$id = $this->input->post('baris_id');
 		$baris->delete($id);
-		redirect(site_url('componen/index/' . $idi));
+		echo $id;
+		redirect(site_url('compt/index/' . $idi));
 	}
 
 	public function delete_kolom($idi = null)
@@ -99,6 +115,6 @@ class Componen extends CI_Controller
 		$kolom = $this->m_kolom;
 		$id = $this->input->post('kolom_id');
 		$kolom->delete($id);
-		redirect(site_url('componen/index/' . $idi));
+		redirect(site_url('compt/index/' . $idi));
 	}
 }

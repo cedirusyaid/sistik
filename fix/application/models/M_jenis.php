@@ -15,6 +15,11 @@ class m_jenis extends CI_Model
 	{
 		return [
 			[
+				'field' => 'jenis_id',
+				'label' => 'jenis_id',
+				'rules' => 'required'
+			],
+			[
 				'field' => 'jenis_nm',
 				'label' => 'jenis_nm',
 				'rules' => 'required'
@@ -69,7 +74,7 @@ class m_jenis extends CI_Model
 		$this->jenis_id = $post['jenis_id'];
 		$this->jenis_nm = $post['jenis_nm'];
 		$this->jenis_ket = $post['jenis_ket'];
-
+		print_r($post);
 		return $this->db->update($this->_table, $this, array('jenis_id' => $post['jenis_id']));
 	}
 

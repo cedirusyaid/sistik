@@ -9,7 +9,7 @@ class m_baris extends CI_Model
 	public $baris_id;
 	public $baris_nm;
 	public $baris_induk;
-	public $tabel_id;
+	public $jenis_id;
 
 	public function rules()
 	{
@@ -20,8 +20,8 @@ class m_baris extends CI_Model
 				'rules' => 'required'
 			],
 			[
-				'field' => 'tabel_id',
-				'label' => 'tabel_id',
+				'field' => 'jenis_id',
+				'label' => 'jenis_id',
 				'rules' => 'required'
 			]
 		];
@@ -39,15 +39,47 @@ class m_baris extends CI_Model
 			SELECT A.*,
 			(SELECT COUNT(B.baris_id) FROM baris_data B WHERE A.baris_id = B.baris_induk ) AS jumlah_anak
 			FROM baris_data A
-			WHERE A.jenis_id = $jenis_id
+			WHERE A.jenis_id = '$jenis_id'
 
 		");
 		return $query->result();
 	}
 
+	// public function getBarisInduk($jenis_id = 0)
+	// {
+	// 	$query = $this->db->query("
+
+	// 		SELECT A.*,
+	// 		(SELECT COUNT(C.baris_id) FROM baris_data C WHERE A.baris_id = C.baris_induk ) AS jumlah_anak
+	// 		FROM baris_data A
+	// 			LEFT JOIN baris_data B
+	// 			 ON A.baris_induk = B.baris_id
+	// 		WHERE B.jenis_id = '$jenis_id' or A.jenis_id = '$jenis_id' 
+
+	// 	");
+	// 	//	return $query -> row_array();
+	// 		return $query -> result();
+
+
+
+
+
+
+
+
+	// }
+
 	public function getById($id)
 	{
-		return $this->db->get_where($this->_table, ["baris_id" => $id])->row();
+		$query = $this->db->query("
+
+			SELECT A.*,
+			(SELECT COUNT(B.baris_id) FROM baris_data B WHERE A.baris_id = B.baris_induk ) AS jumlah_anak
+			FROM baris_data A
+			WHERE A.baris_id = '$id'
+
+		");
+		return $query->row();
 	}
 
 	public function save()
@@ -55,8 +87,10 @@ class m_baris extends CI_Model
 		$post = $this->input->post();
 
 		$this->baris_nm = $post["baris_nm"];
-		$this->tabel_id = $post["tabel_id"];
+		$this->jenis_id = $post["jenis_id"];
 		$this->baris_induk = $post["baris_induk"];
+
+		// print_r($this);
 		// if (isset($post["baris_induk"]) == 0) {
 		// 	$this->baris_induk = 0;
 		// } else {
@@ -70,7 +104,7 @@ class m_baris extends CI_Model
 		$post = $this->input->post();
 		$this->baris_id = $post['baris_id'];
 		$this->baris_nm = $post['baris_nm'];
-		$this->tabel_id = $post['tabel_id'];
+		$this->jenis_id = $post['jenis_id'];
 		if (isset($post['baris_induk']) == 0) {
 			$this->baris_induk = 0;
 		} else {

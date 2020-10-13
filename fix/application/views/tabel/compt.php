@@ -1,7 +1,11 @@
 <?php
+$this->load->model('m_baris');
+$this->load->model('m_kolom');
+$this->load->model('m_tabel');
 $this->load->view('layout/header');
 
 $this->load->view('layout/sidebar.php');
+
 // print_r($tabel);
 ?>
 
@@ -34,58 +38,87 @@ $this->load->view('layout/sidebar.php');
 				<div class="col-6">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="card-title">Baris Data</h3>
+							<h3 class="card-title">Baris Data <?= $tabel['jenis_nm']; ?></h3>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
+<<<<<<< HEAD:fix/application/views/tabel/componen.php
 							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i> Tambah Data</button>
 
 							
 
+=======
+							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-baris"><i class="fas fa-plus"></i> Tambah Baris</button>
+>>>>>>> be7cb2c58daff0504a3bae9cbf4f5e73007f5534:fix/application/views/tabel/compt.php
 							<table id="" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th class="text-center">No.</th>
+										<!-- <th class="text-center">No.</th> -->
 										<th class="text-center">Nama Baris</th>
-										<th class="text-center">Aksi</th>
+										<th class="text-center" width="20%">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
+									// print_r($baris_col);
 									$no = 0;
-									foreach ($baris_col as $data) :
-										// print_r($data);
-										if ($data->baris_induk == 0 || $data->baris_induk == 1) {
+									// echo "jumlah induk :".count($baris_induk);
+									// echo "induk  :".print_r($baris_induk);
 
-											$no++;
-									?>
+
+
+
+
+									if (count($baris_col)>0) {
+										# code...
+										foreach ($baris_col as $b1) :
+											if ($b1->baris_id>1 and $b1->baris_induk==0) {
+												# code...
+										$baris_detail = $this->m_baris->getById($b1->baris_id);
+
+											?>
 											<tr>
-												<td scope="row"><?= $no; ?>.</td>
-												<td>
-													<?= $data->baris_nm; ?>
-												</td>
-												<td>
-													<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-baris" data-id="<?= $data->baris_id; ?>" data-name="<?= $data->baris_nm; ?>"><i class="fas fa-edit"></i></button> |
-													<button data-toggle="modal" class="btn btn-danger btn-sm btn-delete-baris" data-id="<?= $data->baris_id; ?>"><i class="fas fa-trash"></i></button>
+												<td class="text-left"><?=$b1->baris_nm."   ".$b1->jumlah_anak?></td>
+												<td class="text-center">
+
+													<?php if($b1->jumlah_anak<1) { ?>
+													<button data-toggle="modal" class="badge btn-info btn-sm btn-edit-baris" data-id="<?= $b1->baris_id; ?>" data-name="<?= $b1->baris_nm; ?>"><i class="fas fa-edit"></i></button>
+													<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-id="<?= $b1->baris_id; ?>"><i class="fas fa-trash"></i></button>
+													<?php } ?>
+
+
 												</td>
 											</tr>
 											<?php
-											foreach ($baris as $data1) :
-												if ($data1->baris_induk == $data->baris_id) {
-											?>
+										}
+												foreach ($baris_col as $b2) :
+													if ($b2->baris_induk == $b1->baris_id) {
+														# code...
+												$baris_detail = $this->m_baris->getById($b2->baris_id);
+
+													?>
 													<tr>
-														<td></td>
-														<td><?= $data1->baris_nm; ?></td>
-														<td>
-															<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-baris" data-id="<?= $data1->baris_id; ?>" data-name="<?= $data1->baris_nm; ?>"><i class="fas fa-edit"></i></button> |
-															<button data-toggle="modal" class="btn btn-danger btn-sm btn-delete-baris" data-id="<?= $data1->baris_id; ?>"><i class="fas fa-trash"></i></button>
+														<td class="text-left"><li><?=$b2->baris_nm."   ".$b2->jumlah_anak?></li></td>
+														<td class="text-center">
+
+															<?php if($b2->jumlah_anak<1) { ?>
+															<button data-toggle="modal" class="badge btn-info btn-sm btn-edit-baris" data-id="<?= $b2->baris_id; ?>" data-name="<?= $b2->baris_nm; ?>"><i class="fas fa-edit"></i></button>
+															<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-id="<?= $b2->baris_id; ?>"><i class="fas fa-trash"></i></button>
+															<?php } ?>
+
+
 														</td>
 													</tr>
-									<?php
+													<?php
 												}
-											endforeach;
-										}
-									endforeach ?>
+												endforeach;
+
+										endforeach;
+									} 
+
+		
+								
+								?>
 								</tbody>
 							</table>
 						</div>
@@ -102,7 +135,7 @@ $this->load->view('layout/sidebar.php');
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">
-							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-kolom"><i class="fas fa-plus"></i> Tambah Data</button>
+							<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal-kolom"><i class="fas fa-plus"></i> Tambah Kolom</button>
 							<table id="table1" class="table table-bordered table-striped">
 								<thead>
 									<tr>
@@ -152,8 +185,8 @@ $this->load->view('layout/sidebar.php');
 
 <!-- Baris Section Modal -->
 <!-- Modal Tambah Baris-->
-<form action="<?= site_url('componen/add_baris/' . $tabel['tabel_id']) ?>" method="post">
-	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
+<form action="<?= site_url('compt/add_baris/' . $tabel['tabel_id']) ?>" method="post">
+	<!-- <input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>"> -->
 	<div class="modal fade" id="addModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -167,10 +200,10 @@ $this->load->view('layout/sidebar.php');
 					<div class="form-group">
 						<label>Baris Induk</label>
 						<div class="dropdown bootstrap-select dropdown w-100">
-							<select class="form-control" name="baris_induk">
-								<option>Pilih Baris Induk</option>
+							<select class="form-control" name="baris_induk" required="">
+								<option value="0">Pilih Baris Induk</option>
 								<?php
-								foreach ($baris as $data) :
+								foreach ($baris_col as $data) :
 									if ($data->baris_induk == 0) { ?>
 										<option value="<?= $data->baris_id ?>"><?= $data->baris_nm ?></option>
 								<?php };
@@ -184,6 +217,7 @@ $this->load->view('layout/sidebar.php');
 					</div>
 				</div>
 				<div class="modal-footer">
+					<input type="hidden" name="jenis_id" value="<?= $tabel['jenis_id']; ?>">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Save</button>
 				</div>
@@ -194,7 +228,7 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Tambah Baris-->
 
 <!-- Modal Edit Baris-->
-<form action="<?= site_url('componen/edit_baris/' . $tabel['tabel_id']) ?>" method="post">
+<form action="<?= site_url('compt/edit_baris/' . $tabel['tabel_id']) ?>" method="post">
 	<div class="modal fade" id="editModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -231,8 +265,8 @@ $this->load->view('layout/sidebar.php');
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
-					<input type="hidden" name="baris_id" class="form-control baris_id">
+					<input type="hidden" name="jenis_id" value="<?= $tabel['jenis_id']; ?>">
+					<!-- <input type="hidden" name="baris_id" class="form-control baris_id"> -->
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Save</button>
 				</div>
@@ -243,9 +277,9 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Edit Product-->
 
 <!-- Modal Delete Baris-->
-<form action="<?= site_url('componen/delete_baris/' . $tabel['tabel_id']) ?>" method="post">
+<form action="<?= site_url('compt/delete_baris/' . $tabel['tabel_id']) ?>" method="post">
 	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
-	<input type="hidden" name="baris_id" class="baris_id">
+	<input type="hidden" name="baris_id" value="<?= $tabel['jenis_id']; ?>">
 
 	<div class="modal fade" id="deleteModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -272,7 +306,7 @@ $this->load->view('layout/sidebar.php');
 
 <!-- kolom Section Modal -->
 <!-- Modal Tambah kolom-->
-<form action="<?= site_url('componen/add_kolom/' . $tabel['tabel_id']) ?>" method="post">
+<form action="<?= site_url('compt/add_kolom/' . $tabel['tabel_id']) ?>" method="post">
 	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 	<div class="modal fade" id="addModal-kolom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -305,7 +339,7 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Tambah kolom-->
 
 <!-- Modal Edit kolom-->
-<form action="<?= site_url('componen/edit_kolom/' . $tabel['tabel_id']) ?>" method="post">
+<form action="<?= site_url('compt/edit_kolom/' . $tabel['tabel_id']) ?>" method="post">
 	<div class="modal fade" id="editModal-kolom" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -339,7 +373,7 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Edit Product-->
 
 <!-- Modal Delete kolom-->
-<form action="<?= site_url('componen/delete_kolom/' . $tabel['tabel_id']) ?>" method="post">
+<form action="<?= site_url('compt/delete_kolom/' . $tabel['tabel_id']) ?>" method="post">
 	<input type="hidden" name="tabel_id" value="<?= $tabel['tabel_id']; ?>">
 	<input type="hidden" name="kolom_id" class="kolom_id">
 
