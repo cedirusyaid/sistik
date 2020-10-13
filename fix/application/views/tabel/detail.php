@@ -43,71 +43,75 @@ $this->load->view('layout/sidebar.php');
 								<?php
 								for ($i = 2015; $i <= date('Y'); $i++) { ?>
 									<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i) ?>" <?php
-<<<<<<< HEAD
-																																					?>>
-										<?= $i; ?>
-=======
-										if ($i==$tahun) {
-											echo "selected";
-										}
+									if ($i==$tahun) {
+										echo "selected";
+									}
 									?>><?=$i?>
->>>>>>> be7cb2c58daff0504a3bae9cbf4f5e73007f5534
-									</option>
+								</option>
 								<?php
-								}
-								?>
-							</select>
-						</div>
+							}
+							?>
+						</select>
+					</div>
 
-						<!-- /.card-header -->
-						<div class="card-body">
-							<table id="" class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<th width="5%">No</th>
-										<th><?=$tabel['jenis_nm']?></th>
-										<?php
-										$no = 0;
-										foreach ($kolom as $data) :
-											$no++;
-										?>
-											<th><?= $data->kolom_nm ?></th>
-										<?php endforeach ?>
-									</tr>
-								</thead>
-								<tbody>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="" class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th width="5%" class="text-center">No</th>
+									<th class="text-center"><?=$tabel['jenis_nm']?></th>
 									<?php
-									// print_r($baris_col);
-									// $no = 0;
-									// echo "jumlah induk :".count($baris_induk);
-									// echo "induk  :".print_r($baris_induk);
-									$j = 1;
-									if (count($baris_induk)>0) {
-										# code...
-										foreach ($baris_induk as $bi) :
-											if ($bi->baris_id>1) {
+									$no = 0;
+									foreach ($kolom as $data) :
+										$no++;
+										?>
+										<th class="text-center"><?= $data->kolom_nm ?></th>
+									<?php endforeach ?>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+
+
+
+								if (count($baris_col)>0) {
+									$nmr = 0;
+									foreach ($baris_col as $b1) :
+										if ($b1->baris_id>1 and $b1->baris_induk==0) {
+										$nmr++;
 												# code...
-										$baris_detail = $this->m_baris->getById($bi->baris_id);
-										
+											$baris_detail = $this->m_baris->getById($b1->baris_id);
+
 											?>
 											<tr>
-												<td class="text-left"><?=$j?></td>
-												<td class="text-left"><?=$bi->baris_nm?></td>
-
-
-
+												<td class="text-right"><?=$nmr?>.</td>
+												<td class="text-left"><?=$b1->baris_nm?></td>
+												<?php
+												foreach ($kolom as $klm) :
+													$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $b1->baris_id, $tahun);
+													if (isset($isi)) {
+														$value = $isi->isi_value;
+													} else {
+														$value = "";
+													}
+													?>
+													<td><?= $value  ?></td>
+												<?php endforeach
+												?>
+												
 											</tr>
 											<?php
-											// }
+										}
+										foreach ($baris_col as $b2) :
+											if ($b2->baris_induk == $b1->baris_id) {
+														# code...
+												$baris_detail = $this->m_baris->getById($b2->baris_id);
 
-												foreach ($baris_col as $b2) :
-													// print_r($b2);
-													if ($b2->baris_induk == $bi->baris_id) {
 												?>
-														<tr>
-															<td class="text-left"></li></td>
-															<td class="text-left"><li><?= $b2->baris_nm; ?></li></td>
-
+												<tr>
+													<td></td>
+													<td class="text-left"><li><?=$b2->baris_nm."   ".$b2->jumlah_anak?></li></td>
 													<?php
 													foreach ($kolom as $klm) :
 														$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $b2->baris_id, $tahun);
@@ -116,84 +120,34 @@ $this->load->view('layout/sidebar.php');
 														} else {
 															$value = "";
 														}
-													?>
-														<td><?= $value  ?></td>
-													<?php endforeach ?>
-
-
-
-														</tr>
-												<?php
-													}
-												endforeach;
-										}
-										$j++;
-										endforeach;
-									} 
-
-									?>
-
-									<!-- LAMA -->
-									<?php
-									$no = 0;
-									foreach ($baris as $brs) :
-										if ($brs->baris_induk == 0) {
-											$no++;
-									?>
-											<tr>
-												<td><?= $no ?></td>
-												<td>
-													<?= $brs->baris_nm ?>
-												</td>
-												<?php
-												foreach ($kolom as $klm) :
-													$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $brs->baris_id, $tahun);
-													if (isset($isi)) {
-														$value = $isi->isi_value;
-													} else {
-														$value = "";
-													}
-												?>
-													<td><?= $value  ?></td>
-												<?php endforeach ?>
-											</tr>
-											<?php
-											foreach ($baris as $data1) :
-												if ($data1->baris_induk == $brs->baris_id) {
-											?>
-													<tr>
-														<td></td>
-														<td><?= $data1->baris_nm; ?></td>
-														<?php
-														foreach ($kolom as $klm) :
-															$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $data1->baris_id, $tahun);
-															if (isset($isi)) {
-																$value = $isi->isi_value;
-															} else {
-																$value = "";
-															}
 														?>
-															<td><?= $value  ?></td>
-														<?php endforeach ?>
-												<?php };
-											endforeach ?>
-													</tr>
-											<?php };
-									endforeach ?>
-								</tbody>
-							</table>
-						</div>
-						<!-- /.card-body -->
+														<td><?= $value  ?></td>
+													<?php endforeach
+													?>
+												</tr>
+												<?php
+											}
+										endforeach;
+
+									endforeach;
+								} 
+
+
+								?>
+							</tbody>
+						</table>
 					</div>
-					<!-- /.card -->
+					<!-- /.card-body -->
 				</div>
-				<!-- /.col -->
+				<!-- /.card -->
 			</div>
-			<!-- /.row -->
+			<!-- /.col -->
 		</div>
-		<!-- /.container-fluid -->
-	</section>
-	<!-- /.content -->
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 

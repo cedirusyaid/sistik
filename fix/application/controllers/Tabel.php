@@ -116,7 +116,7 @@ class Tabel extends CI_Controller
 		$data['detail'] = $this->m_tabel->getById($id);
 		// $data['baris'] = $this->m_tabel->tabel_baris($id);
 		$data['baris_col'] = $this->m_baris->getBarisAll($tabel['jenis_id']);
-		$data['baris_induk'] = $this->m_baris->getBarisInduk($tabel['jenis_id']);
+		// $data['baris_induk'] = $this->m_baris->getBarisInduk($tabel['jenis_id']);
 		$data['kolom'] = $this->m_tabel->tabel_kolom($id);
 		$data['tabel_id'] = $id;
 
