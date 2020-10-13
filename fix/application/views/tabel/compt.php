@@ -78,7 +78,7 @@ $this->load->view('layout/sidebar.php');
 
 											?>
 											<tr>
-												<td class="text-left"><?=$b1->baris_nm."   ".$b1->jumlah_anak?></td>
+												<td class="text-left"><?=$b1->baris_nm?></td>
 												<td class="text-center">
 
 													<?php if($b1->jumlah_anak<1) { ?>

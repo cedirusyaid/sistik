@@ -6,10 +6,10 @@ class m_baris extends CI_Model
 
 	private $_table = "baris_data";
 
-	public $baris_id;
-	public $baris_nm;
-	public $baris_induk;
-	public $jenis_id;
+	// public $baris_id;
+	// public $baris_nm;
+	// public $baris_induk;
+	// public $jenis_id;
 
 	public function rules()
 	{
