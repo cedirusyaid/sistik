@@ -108,7 +108,9 @@ $this->load->view('layout/sidebar.php');
 
 											?>
 											<tr>
-												<td class="text-right"><?=$nmr?>.</td>
+												<td class="text-right">
+													<?=$nmr?>.
+												</td>
 												<td class="text-left"><?=$b1->baris_nm?></td>
 												<?php
 												foreach ($kolom as $klm) :
@@ -119,7 +121,13 @@ $this->load->view('layout/sidebar.php');
 														$value = "";
 													}
 													?>
-													<td>
+
+													<td class="
+														<?php if ($klm->kolom_tipe == 'Angka'): 
+															echo 'text-right';
+														endif ?>
+													"
+													>
 
 													<?php
 													if ($edit == 1) {
@@ -163,7 +171,12 @@ $this->load->view('layout/sidebar.php');
 															$value = "";
 														}
 														?>
-														<td>
+														<td class="
+														<?php if ($klm->kolom_tipe == 'Angka'): 
+															echo 'text-right';
+														endif ?>
+													"
+													>
 														<?php
 														if ($edit == 1) {
 															?>
@@ -177,7 +190,11 @@ $this->load->view('layout/sidebar.php');
 															echo $value;
 														}
 													?>
-															</td>
+														
+
+
+
+														</td>
 													<?php endforeach
 													?>
 												</tr>

@@ -136,4 +136,34 @@ class Jenis extends CI_Controller
 		header('Location: ' . base_url('jenis/detail/' . $data_form['tabel_id'] . '/' . $data_form['tahun']));
 	}
 
+
+	public function edit_baris($id = null)
+	{
+		$baris = $this->m_baris;
+		$validation = $this->form_validation;
+		$validation->set_rules($baris->rules());
+
+		// print_r($this->input->post());
+		if ($validation->run()) {
+			$baris->update();
+			$this->session->set_flashdata('success', 'Berhasil disimpan');
+			redirect(site_url('jenis/detail/' . $id));
+		}
+
+
+	}
+
+
+	public function delete_baris($idi = null)
+	{
+		$baris = $this->m_baris;
+		$id = $this->input->post('baris_id');
+		$aksi = $baris->delete($id);
+		// echo $aksi;
+		print_r($this->input->post());
+		// echo $id;
+		redirect(site_url('jenis/detail/' . $idi));
+	}
+
+
 }

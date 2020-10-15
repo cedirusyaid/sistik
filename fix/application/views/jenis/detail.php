@@ -73,7 +73,7 @@ $this->load->view('layout/sidebar.php');
 
 												<?php if($b1->jumlah_anak<1) { ?>
 													<button data-toggle="modal" class="badge btn-info btn-sm btn-edit-baris" data-target="#edit<?= $b1->baris_id; ?>" ><i class="fas fa-edit"></i></button>
-													<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-id="<?= $b1->baris_id; ?>"><i class="fas fa-trash"></i></button>
+													<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris"  data-target="#hapus<?= $b1->baris_id; ?>"><i class="fas fa-trash"></i></button>
 												<?php } ?>
 
 
@@ -93,7 +93,7 @@ $this->load->view('layout/sidebar.php');
 
 													<?php if($b2->jumlah_anak<1) { ?>
 														<button data-toggle="modal" class="badge btn-info btn-sm btn-edit-baris" data-target="#edit<?= $b2->baris_id; ?>" data-name="<?= $b2->baris_nm; ?>"><i class="fas fa-edit"></i></button>
-														<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-id="<?= $b2->baris_id; ?>"><i class="fas fa-trash"></i></button>
+														<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-target="#hapus<?= $b1->baris_id; ?>"><i class="fas fa-trash"></i></button>
 													<?php } ?>
 
 
@@ -184,10 +184,10 @@ $this->load->view('layout/sidebar.php');
 	<!-- End Modal Tambah Baris-->
 
 	<!-- Modal Edit Baris-->
-	<?php foreach ($baris_col as $data1) { ?>
+	<?php foreach ($baris_col as $dta1) { ?>
 
-		<div class="modal fade" id="edit<?=$data1->baris_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<form action="<?= site_url('compt/edit_baris/' . $jenis_id) ?>" method="post">
+		<div class="modal fade" id="edit<?=$dta1->baris_id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<form action="<?= site_url('jenis/edit_baris/' . $jenis_id) ?>" method="post">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -203,13 +203,13 @@ $this->load->view('layout/sidebar.php');
 									<select class="form-control" name="baris_induk">
 										<option value="0">Baris Induk</option>
 										<?php
-										foreach ($baris_col as $data2) :
-											if ($data2->baris_induk == 0 and $data1->baris_id !== $data2->baris_id) { ?>
-												<option value="<?= $data2->baris_id ?>" <?php if ($data2->baris_id !== $data2->baris_induk) {
+										foreach ($baris_col as $dta2) :
+											if ($dta2->baris_induk == 0 and $dta1->baris_id !== $dta2->baris_id) { ?>
+												<option value="<?= $dta2->baris_id ?>" <?php if ($dta2->baris_id == $dta1->baris_induk) {
 													echo "selected";
 												}
 												?>>
-												<?= $data2->baris_nm ?>
+												<?= $dta2->baris_nm ?>
 											</option>
 										<?php };
 									endforeach ?>
@@ -218,12 +218,12 @@ $this->load->view('layout/sidebar.php');
 						</div>
 						<div class="form-group">
 							<label>Nama Baris</label>
-							<input type="text" class="form-control baris_nm" name="baris_nm" placeholder="Nama Baris" value ="<?= $data1->baris_nm ?>"
-							>
+							<input type="text" class="form-control" name="baris_nm" value="<?= $dta1->baris_nm ?>">
 						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" name="jenis_id" value="<?= $jenis_id; ?>">
+						<input type="hidden" name="baris_id" value="<?= $dta1->baris_id; ?>">
 						<!-- <input type="hidden" name="baris_id" class="form-control baris_id"> -->
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary">Save</button>
@@ -236,10 +236,11 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Edit Product-->
 
 <!-- Modal Delete Baris-->
-<form action="<?= site_url('compt/delete_baris/' . $jenis_id) ?>" method="post">
-	<input type="hidden" name="baris_id" value="<?= $jenis_id; ?>">
+<?php foreach ($baris_col as $data2) :?>
 
-	<div class="modal fade" id="deleteModal-baris" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="hapus<?= $data2->baris_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<form action="<?= site_url('jenis/delete_baris/' . $jenis_id) ?>" method="post">
+		<input type="hidden" name="baris_id" value="<?=$data2->baris_id?>">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -257,8 +258,9 @@ $this->load->view('layout/sidebar.php');
 				</div>
 			</div>
 		</div>
+	</form>
 	</div>
-</form>
+<?php endforeach ?>
 <!-- End Modal Delete Baris -->
 <!-- End Baris Section Modal -->
 

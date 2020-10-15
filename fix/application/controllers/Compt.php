@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 use phpDocumentor\Reflection\Types\Null_;
 
@@ -52,7 +52,7 @@ class Compt extends CI_Controller
 		if ($validation->run()) {
 			$baris->save();
 			$this->session->set_flashdata('success', 'Berhasil disimpan', 'ERROR');
-			redirect(site_url('compt/index/' . $id));
+			redirect(site_url('jenis/detail/' . $id));
 		}
 	}
 
@@ -99,15 +99,6 @@ class Compt extends CI_Controller
 
 		$this->load->view('compt', $data);
 		// $this->load->view('tabel/edit', $data_array);
-	}
-
-	public function delete_baris($idi = null)
-	{
-		$baris = $this->m_baris;
-		$id = $this->input->post('baris_id');
-		$baris->delete($id);
-		echo $id;
-		redirect(site_url('compt/index/' . $idi));
 	}
 
 	public function delete_kolom($idi = null)
