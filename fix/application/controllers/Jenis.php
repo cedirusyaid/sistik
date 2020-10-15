@@ -82,8 +82,10 @@ class Jenis extends CI_Controller
 
 		$data['jenis_id'] = $id;
 		$data['tahun'] = $tahun;
+		$data['jenisAll'] = $this->m_jenis->getAll();
 
 		$data['baris_col'] = $this->m_baris->getBarisAll($id);
+		$data['baris_kec'] = $this->m_baris->getBarisAll(101);
 		$data['detail'] = $this->m_jenis->getById($id);
 		$data['baris'] = $this->m_jenis->getJenisAll($id);
 

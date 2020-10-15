@@ -150,7 +150,7 @@ class Tabel extends CI_Controller
 	{
 
 		$data = $this->input->post();
-		print_r($data);
+		// print_r($data);
 
 		$data_form['tahun'] = $this->input->post('tahun');
 		$data_form['tabel_id'] = $tabel_id = $this->input->post('tabel_id');

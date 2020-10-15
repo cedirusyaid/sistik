@@ -123,7 +123,7 @@ $this->load->view('layout/sidebar.php');
 													?>
 
 													<td class="
-														<?php if ($klm->kolom_tipe == 'Angka'): 
+														<?php if ($klm->kolom_tipe == 'Angka' AND $edit == 0): 
 															echo 'text-right';
 														endif ?>
 													"
@@ -132,11 +132,15 @@ $this->load->view('layout/sidebar.php');
 													<?php
 													if ($edit == 1) {
 														?>
-														<input type="<?php if ($b1->jumlah_anak == 0) {
+														<input type="<?php if ($b1->jumlah_anak == 0 OR $detail['jenis_id'] == 101) {
 																echo "text";
 															} else if ($b1->jumlah_anak > 0) {
 																echo "hidden";
-															} ?>" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $b1->baris_id; ?>" value="<?= $value  ?>">
+															} ?>" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $b1->baris_id; ?>" value="<?= $value  ?>"
+															<?php if ($klm->kolom_tipe == 'Angka'): ?>
+																size = "20px"
+																<?php endif ?>
+																>
 														<?php
 														} else {
 															echo $value;
@@ -161,7 +165,7 @@ $this->load->view('layout/sidebar.php');
 												?>
 												<tr>
 													<td></td>
-													<td class="text-left"><li><?=$b2->baris_nm."   ".$b2->jumlah_anak?></li></td>
+													<td class="text-left"><li><?=$b2->baris_nm?></li></td>
 													<?php
 													foreach ($kolom as $klm) :
 														$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $b2->baris_id, $tahun);
@@ -184,7 +188,11 @@ $this->load->view('layout/sidebar.php');
 																	echo "text";
 																} else if ($b2->jumlah_anak > 0) {
 																	echo "hidden";
-																} ?>" class="form-control" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $b2->baris_id; ?>" value="<?= $value  ?>">
+																} ?>" class="" name="<?php echo 'isi_' . $klm->kolom_id . '_' . $b2->baris_id; ?>" value="<?= $value  ?>" 
+																<?php if ($klm->kolom_tipe == 'Angka'): ?>
+																size = "20px"
+																<?php endif ?>
+																>
 														<?php
 														} else {
 															echo $value;
