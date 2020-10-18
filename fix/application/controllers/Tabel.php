@@ -14,6 +14,18 @@ class Tabel extends CI_Controller
 		$this->load->model('m_kolom');
 		$this->load->model('m_isi');
 		$this->load->library('form_validation');
+
+        // $this->is_logged_in();
+		
+	}
+
+	private function is_logged_in() {
+		$is_logged_in = $this -> session -> userdata('is_logged_in');
+		if (!isset($is_logged_in) || $is_logged_in != true) {
+			// echo 'Anda tidak memiliki akses untuk masuk ke halaman ini. <a href="' . base_url('login') . '">Login</a>';
+			// die();
+			header('Location: ' . (base_url("/user/login/")));
+		}
 	}
 
 	private function get_unit() 
@@ -26,12 +38,19 @@ class Tabel extends CI_Controller
 	public function index()
 	{
 		$data['tabel'] = $this->m_tabel->getAll();
+		$data['jenisAll'] = $this->m_jenis->getAll();
+
+		$data['userdata'] = $this -> session -> userdata();
 		// print_r($data);
+
+		$this->load->view('layout/top');
 		$this->load->view('tabel/index', $data);
+		$this->load->view('layout/bottom');
 	}
 
 	public function add()
 	{
+        $this->is_logged_in();
 		$url = "http://apps.sinjaikab.go.id/api/pegawai/get_unit";
 		$get_url = file_get_contents($url);
 		$unit = json_decode($get_url);
@@ -60,13 +79,17 @@ class Tabel extends CI_Controller
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
 			redirect(site_url('tabel'));
 		}
+		$this->load->view('layout/top');
 		$this->load->view('tabel/add', $data);
+		$this->load->view('layout/bottom');
 		// $this->load->view('tabel/add');
 	}
 
 
 	public function edit($id = null)
 	{
+        $this->is_logged_in();
+
 		if (!isset($id)) redirect('tabel');
 
 		$data_array['unit'] = $this -> get_unit();
@@ -74,6 +97,7 @@ class Tabel extends CI_Controller
 		// $data['tabel'] = $this->m_tabel->getAll();
 
 		$data_array['jenis'] = $this->m_jenis->getAll();
+		$data_array['kategori_default'] = $this->m_tabel->kategori_default();
 
 
 		$tabel = $this->m_tabel;
@@ -90,21 +114,34 @@ class Tabel extends CI_Controller
 		if (!$data['tabel']) show_404();
 
 		$this->load->vars($data);
+		$this->load->view('layout/top');
+		// $this->load->view('tabel/detail', $data);
 		$this->load->view('tabel/edit', $data_array);
+		$this->load->view('layout/bottom');
+
+		
 		// $this->load->view('tabel/edit', $data_array);
 	}
 
 	public function hapus($id = null)
 	{
+        $this->is_logged_in();
+
 		if (!isset($id)) show_404();
 
-		if ($this->m_tabel->delete($id) and $this->m_baris->delete_All($id) and $this->m_kolom->delete_all($id)) {
+		if ($this->m_tabel->delete($id) and $this->m_kolom->delete_all($id)) {
 			redirect(site_url('tabel'));
 		}
 	}
 
 	public function detail($id = null, $tahun = null)
 	{
+		$data['jenisAll'] = $this->m_jenis->getAll();
+		$data['userdata'] = $this -> session -> userdata();
+
+
+        $this->is_logged_in();
+
 		if ($tahun == null) {
 			$tahun = date('Y');
 		}
@@ -124,7 +161,10 @@ class Tabel extends CI_Controller
 		$data['tabel_id'] = $id;
 
 		// print_r($data);
+		$this->load->view('layout/top');
 		$this->load->view('tabel/detail', $data);
+		$this->load->view('layout/bottom');
+
 	}
 
 	// public function edit_detail($id = 0, $tahun = 0)
@@ -148,6 +188,7 @@ class Tabel extends CI_Controller
 
 	public function proses_detail()
 	{
+        $this->is_logged_in();
 
 		$data = $this->input->post();
 		// print_r($data);
@@ -165,8 +206,12 @@ class Tabel extends CI_Controller
 				$data_form['isi_value'] = $this->input->post('isi_' . $klm->kolom_id . '_' . $brs->baris_id);
 				$data_form['kolom_id'] = $klm->kolom_id;
 				$data_form['baris_id'] = $brs->baris_id;
+				if(!empty($data_form['isi_value'])) {
 				$this->db->insert('isi_data', $data_form);
 				$this->db->replace('isi_data', $data_form);
+				// print_r($data_form);echo br(2);
+				}
+
 			endforeach;
 		endforeach;
 		header('Location: ' . base_url('tabel/detail/' . $data_form['tabel_id'] . '/' . $data_form['tahun']));
@@ -174,6 +219,8 @@ class Tabel extends CI_Controller
 
 	public function json($id = null, $tahun = null)
 	{
+        $this->is_logged_in();
+
 		if ($tahun == null) {
 			$tahun = date('Y');
 		}

@@ -1,9 +1,4 @@
-<?php
-$this->load->view('layout/header');
 
-$this->load->view('layout/sidebar.php');
-// print_r($unit);
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -12,7 +7,7 @@ $this->load->view('layout/sidebar.php');
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Edit Data</h1>
+					<h1>Edit Data </h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -65,7 +60,31 @@ $this->load->view('layout/sidebar.php');
 											?>
 										</select>
 									</div>
-								</div>								
+								</div>		
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label">Ketegori</label>
+									<div class="col-sm-10">
+
+										<select class="form-control" placeholder="Tabel" name="kategori_id">
+										<option value="">- Pilih Kategori -</option>
+											<?php
+											print_r($tabel);
+											foreach ($kategori_default as $row) :
+												?>
+													<option value="<?=$row->kategori_id?>"
+														<?php
+														if($row->kategori_id == $tabel['kategori_id']) {echo 'selected';}
+														?>
+														><?=$row->kategori_nama?></option>
+												<?php
+											endforeach;
+											?>
+											
+										</select>
+
+									</div>
+								</div>
+						
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label">OPD</label>
 									<div class="col-sm-6">
@@ -140,18 +159,3 @@ $this->load->view('layout/sidebar.php');
 	</div>
 </div>
 
-<?php
-$this->load->view('layout/footer');
-?>
-
-<script>
-	$(document).ready(function() {
-		$('#example').DataTable();
-
-		$(document).on('click', '#unit', function(e) {
-			document.getElementById("unit_id").value = $(this).attr('data-kode');
-			document.getElementById("unit_nm").value = $(this).attr('data-nama');
-			$('#modal').modal('hide');
-		});
-	});
-</script>

@@ -1,10 +1,4 @@
-<?php
-$this->load->view('layout/header');
 
-$this->load->view('layout/sidebar.php');
-											// print_r($unit);
-
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -83,7 +77,7 @@ $this->load->view('layout/sidebar.php');
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Data Yang ditampilkan</label>
+									<label class="col-sm-2 col-form-label">Ketegori</label>
 									<div class="col-sm-10">
 
 										<select class="form-control" placeholder="Tabel" name="kategori_id">
@@ -95,7 +89,6 @@ $this->load->view('layout/sidebar.php');
 												<?php
 											endforeach;
 											?>
-										<option value="">Tambah Kategori</option>
 											
 										</select>
 
@@ -116,7 +109,7 @@ $this->load->view('layout/sidebar.php');
 </div>
 
 <!-- Modal Pilih Unit -->
-<div id="modal" class="modal fade" role="dialog">
+<!-- <div id="modal" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<form method="post" action="">
@@ -155,9 +148,8 @@ $this->load->view('layout/sidebar.php');
 	</div>
 </div>
 
-
-<?php $this->load->view('layout/footer'); ?>
-
+ -->
+<!-- 
 <script>
 	$(document).ready(function() {
 		$('#example').DataTable({
@@ -171,3 +163,4 @@ $this->load->view('layout/sidebar.php');
 		});
 	});
 </script>
+ -->

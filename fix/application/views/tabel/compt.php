@@ -2,9 +2,6 @@
 $this->load->model('m_baris');
 $this->load->model('m_kolom');
 $this->load->model('m_tabel');
-$this->load->view('layout/header');
-
-$this->load->view('layout/sidebar.php');
 
 // print_r($tabel);
 ?>
@@ -259,35 +256,3 @@ $this->load->view('layout/sidebar.php');
 <!-- End Modal Delete Baris -->
 <!-- End Baris Section Modal -->
 
-<?php
-$this->load->view('layout/footer');
-?>
-<script>
-	$(document).ready(function() {
-
-	
-		// get Edit Kolom
-		$('.btn-edit-kolom').on('click', function() {
-			// get data from button edit
-			const id = $(this).data('id');
-			const name = $(this).data('name');
-			const tipe = $(this).data('tipe');
-			// Set data to Form Edit
-			$('.kolom_id').val(id);
-			$('.kolom_nm').val(name);
-			$('.kolom_tipe').val(tipe);
-			// Call Modal Edit
-			$('#editModal-kolom').modal('show');
-		});
-
-		// get Delete kolom
-		$('.btn-delete-kolom').on('click', function() {
-			// get data from button edit
-			const id = $(this).data('id');
-			// Set data to Form Edit
-			$('.kolom_id').val(id);
-			// Call Modal Edit
-			$('#deleteModal-kolom').modal('show');
-		});
-	});
-</script>

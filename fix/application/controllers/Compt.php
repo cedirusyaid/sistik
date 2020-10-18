@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 use phpDocumentor\Reflection\Types\Null_;
 
@@ -14,6 +14,18 @@ class Compt extends CI_Controller
 		$this->load->model('m_kolom');
 		$this->load->model('m_tabel');
 		$this->load->library('form_validation');
+		
+        $this->is_logged_in();
+		
+	}
+
+	private function is_logged_in() {
+		$is_logged_in = $this -> session -> userdata('is_logged_in');
+		if (!isset($is_logged_in) || $is_logged_in != true) {
+			// echo 'Anda tidak memiliki akses untuk masuk ke halaman ini. <a href="' . base_url('login') . '">Login</a>';
+			// die();
+			header('Location: ' . (base_url("/user/login/")));
+		}
 	}
 
 	public function index($id = null)
@@ -34,8 +46,11 @@ class Compt extends CI_Controller
 		
 		// print_r($data['tabel']);
 		// print_r($data['baris_col']);
-
+		$this->load->view('layout/top');
+		// $this->load->view('tabel/detail', $data);
 		$this->load->view('tabel/compt', $data);
+		$this->load->view('layout/bottom');
+
 	}
 
 	public function add_baris($id = null)
