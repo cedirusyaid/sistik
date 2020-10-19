@@ -27,6 +27,11 @@ class m_tabel extends CI_Model
 				'field' => 'jenis_id',
 				'label' => 'jenis_id',
 				'rules' => 'required'
+			],
+			[
+				'field' => 'kategori_id',
+				'label' => 'kategori_id',
+				'rules' => ''
 			]
 			// ,
 			// [
@@ -77,6 +82,7 @@ class m_tabel extends CI_Model
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
 		$this->jenis_id = $post["jenis_id"];
+		$this->kategori_id = $post["kategori_id"];
 		// print_r($post);
 		return $this->db->insert($this->_table, $this);
 	}
@@ -87,6 +93,7 @@ class m_tabel extends CI_Model
 		$this->tabel_nm = $post["tabel_nm"];
 		$this->unit_id = $post["unit_id"];
 		$this->jenis_id = $post["jenis_id"];
+		$this->kategori_id = $post["kategori_id"];
 		return $this->db->update($this->_table, $this, array('tabel_id' => $post['id']));
 	}
 

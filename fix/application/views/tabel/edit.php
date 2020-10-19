@@ -82,6 +82,9 @@ $this->load->view('layout/sidebar.php');
 												<?php
 											}
 											?>
+											<option class="form-control" value="99" <?php
+												if($jns['jenis_id'] == 99) {echo 'selected';}
+												?>>Lainnya / Instansi Vertikal</option>
 										</select>
 									</div>
 								</div>								

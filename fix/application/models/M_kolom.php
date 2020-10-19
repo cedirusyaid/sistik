@@ -9,6 +9,7 @@ class m_kolom extends CI_Model
 	public $kolom_id;
 	public $kolom_nm;
 	public $kolom_tipe;
+	public $kolom_sat;
 	public $tabel_id;
 
 	public function rules()
@@ -22,6 +23,16 @@ class m_kolom extends CI_Model
 			[
 				'field' => 'tabel_id',
 				'label' => 'tabel_id',
+				'rules' => 'required'
+			],
+			[
+				'field' => 'kolom_tipe',
+				'label' => 'kolom_tipe',
+				'rules' => 'required'
+			],
+			[
+				'field' => 'kolom_sat',
+				'label' => 'kolom_sat',
 				'rules' => 'required'
 			]
 		];
@@ -43,6 +54,7 @@ class m_kolom extends CI_Model
 		$this->kolom_nm = $post["kolom_nm"];
 		$this->tabel_id = $post["tabel_id"];
 		$this->kolom_tipe = $post["kolom_tipe"];
+		$this->kolom_sat = $post["kolom_sat"];
 		return $this->db->insert($this->_table, $this);
 	}
 
@@ -52,6 +64,7 @@ class m_kolom extends CI_Model
 		$this->kolom_nm = $post["kolom_nm"];
 		$this->tabel_id = $post["tabel_id"];
 		$this->kolom_tipe = $post["kolom_tipe"];
+		$this->kolom_sat = $post["kolom_sat"];
 
 		return $this->db->update($this->_table, $this, array('kolom_id' => $post['kolom_id']));
 	}

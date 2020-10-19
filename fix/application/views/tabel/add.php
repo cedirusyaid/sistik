@@ -77,6 +77,7 @@ $this->load->view('layout/sidebar.php');
 												<?php
 											}
 											?>
+											<option class="form-control" value="99">Lainnya / Instansi Vertical</option>
 										</select>
 
 

@@ -98,7 +98,7 @@ class Tabel extends CI_Controller
 	{
 		if (!isset($id)) show_404();
 
-		if ($this->m_tabel->delete($id) and $this->m_baris->delete_All($id) and $this->m_kolom->delete_all($id)) {
+		if ($this->m_tabel->delete($id) and $this->m_kolom->delete_all($id)) {
 			redirect(site_url('tabel'));
 		}
 	}
