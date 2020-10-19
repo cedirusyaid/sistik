@@ -1,8 +1,4 @@
-<?php
-$this->load->view('layout/header');
 
-$this->load->view('layout/sidebar.php');
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -61,10 +57,7 @@ $this->load->view('layout/sidebar.php');
 	</section>
 </div>
 
-
-
-<?php $this->load->view('layout/footer'); ?>
-
+<!-- 
 <script>
 	$(document).ready(function() {
 		$('#example').DataTable({
@@ -79,3 +72,4 @@ $this->load->view('layout/sidebar.php');
 		});
 	});
 </script>
+ -->

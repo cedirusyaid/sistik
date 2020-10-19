@@ -59,5 +59,60 @@
 					</div>
 				</div>
 			</form>
+
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Notifications: style can be found in dropdown.less -->
+<!--           <li class="dropdown notifications-menu">
+            <a href="<?php echo base_url(); ?>#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have 10 notifications</li>
+              <li>
+                <ul class="menu">
+                  <li>
+                    <a href="<?php echo base_url(); ?>#">
+                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="footer"><a href="<?php echo base_url(); ?>#">View all</a></li>
+            </ul>
+          </li> -->
+          <!-- User Account: style can be found in dropdown.less -->
+          <li style = "line-height: 50px">
+            <form class="form-inline my-2 my-lg-0" action="<?php echo base_url('data/cari') ?>" method="get" >
+            <input class="form-control mr-sm-2" type="search" name="key" placeholder="Cari NIK/KK/Nama" aria-label="Search" value="<?php if($this->input->get('key')){echo $this->input->get('key');} ?>">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </li>
+          <li>
+            <a href="<?php echo base_url(); ?>#" data-toggle="modal" data-target="#info_web"><i class="fa  fa-info-circle"></i></a>
+          </li>
+          <li class="dropdown user user-menu">
+            <?php if ($this->session->userdata('is_logged_in')) { ?>
+                <a href="<?php echo base_url(); ?>#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="hidden-xs"><?= $this->session->userdata('nama')?></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="footer"><a href="#">Profile</a></li>
+                  <li class="footer"><a href="<?php echo base_url('user/logout'); ?>">Logout</a></li>
+                </ul>
+            <?php } else { ?>
+                  <li class="footer"><a href="<?php echo base_url('user/login'); ?>">Login</a></li>
+            <?php } ?>
+
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+        </ul>
+      </div>		
+
+
+
+
 		</nav>
 		<!-- /.navbar -->

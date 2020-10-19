@@ -1,8 +1,3 @@
-<?php
-$this->load->view('layout/header');
-
-$this->load->view('layout/sidebar.php');
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -93,8 +88,3 @@ $this->load->view('layout/sidebar.php');
 	</section>
 	<!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
-
-<?php
-$this->load->view('layout/footer');
-?>

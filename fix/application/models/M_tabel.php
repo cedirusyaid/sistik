@@ -9,6 +9,7 @@ class m_tabel extends CI_Model
 	public $tabel_nm;
 	public $unit_id;
 	public $jenis_id;
+	public $kategori_id;
 
 	public function rules()
 	{
@@ -33,6 +34,12 @@ class m_tabel extends CI_Model
 				'label' => 'kategori_id',
 				'rules' => ''
 			]
+,
+			[
+				'field' => 'kategori_id',
+				'label' => 'kategori_id',
+				'rules' => 'required'
+			]
 			// ,
 			// [
 			// 	'field' => 'unit_nm',
@@ -48,11 +55,14 @@ class m_tabel extends CI_Model
 
 			
 			$query  = $this->db->query("
-			SELECT A.*, B.*
+			SELECT A.*, B.*, C.*
 			FROM tabel_data A
 			LEFT JOIN jenis_data B
 			ON A.jenis_id = B.jenis_id
-			ORDER BY A.tabel_nm
+			LEFT JOIN kategori_data C
+			ON A.kategori_id = C.kategori_id
+			WHERE A.deleted IS NULL
+			ORDER BY A.kategori_id ASC, A.tabel_nm ASC
 			");
 
 			return $query->result_array();
@@ -64,10 +74,12 @@ class m_tabel extends CI_Model
 	{
 
 			$query  = $this->db->query("
-			SELECT A.*, B.*
+			SELECT A.*, B.*, C.*
 			FROM tabel_data A
 			LEFT JOIN jenis_data B
 			ON A.jenis_id = B.jenis_id
+			LEFT JOIN kategori_data C
+			ON A.kategori_id = C.kategori_id
 			WHERE A.tabel_id = $id
 			ORDER BY A.tabel_nm
 			");
@@ -99,7 +111,16 @@ class m_tabel extends CI_Model
 
 	public function delete($id)
 	{
-		return $this->db->delete($this->_table, array("tabel_id" => $id));
+		// return $this->db->delete($this->_table, array("tabel_id" => $id));
+		$tabel = $this->getById($id);
+		$dataform['tabel_id'] = $tabel['tabel_id'];
+		$dataform['deleted'] = date('Y-m-d H:i:s');
+		return $this->db->update($this->_table, $dataform, array('tabel_id' => $dataform['tabel_id']));
+		// print_r($dataform);
+
+
+
+
 	}
 
 	public function tabel_baris($id = null)

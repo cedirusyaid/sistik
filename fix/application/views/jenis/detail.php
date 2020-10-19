@@ -1,9 +1,4 @@
-<?php
-$this->load->view('layout/header');
 
-$this->load->view('layout/sidebar.php');
-?>
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -121,7 +116,7 @@ $this->load->view('layout/sidebar.php');
 
 														<?php if($b2->jumlah_anak<1) : ?>
 															<button data-toggle="modal" class="badge btn-info btn-sm btn-edit-baris" data-target="#edit<?= $b2->baris_id; ?>" data-name="<?= $b2->baris_nm; ?>"><i class="fas fa-edit"></i></button>
-															<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-target="#hapus<?= $b1->baris_id; ?>"><i class="fas fa-trash"></i></button>
+															<button data-toggle="modal" class="badge btn-danger btn-sm btn-delete-baris" data-target="#hapus<?= $b2->baris_id; ?>"><i class="fas fa-trash"></i></button>
 														<?php endif ?>
 												</td>
 													<?php endif ?>
@@ -155,14 +150,6 @@ $this->load->view('layout/sidebar.php');
 		</section>
 		<!-- /.content -->
 	</div>
-	<!-- /.content-wrapper -->			
-
-
-
-	<?php
-	$this->load->view('layout/footer');
-	?>
-
 
 
 

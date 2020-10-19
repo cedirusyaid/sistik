@@ -32,8 +32,8 @@ class m_kolom extends CI_Model
 			],
 			[
 				'field' => 'kolom_sat',
-				'label' => 'kolom_sat',
-				'rules' => 'required'
+				'label' => 'kolom_sat'
+				// , 				'rules' => 'required'
 			]
 		];
 	}

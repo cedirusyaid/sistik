@@ -14,13 +14,30 @@ class Jenis extends CI_Controller
 		$this->load->model('m_jenis');
 		// $this->load->model('m_isi');
 		$this->load->library('form_validation');
+
+        $this->is_logged_in();
+		
+	}
+
+	private function is_logged_in() {
+		$is_logged_in = $this -> session -> userdata('is_logged_in');
+		if (!isset($is_logged_in) || $is_logged_in != true) {
+			// echo 'Anda tidak memiliki akses untuk masuk ke halaman ini. <a href="' . base_url('login') . '">Login</a>';
+			// die();
+			header('Location: ' . (base_url("/user/login/")));
+		}
 	}
 
 	public function index()
 	{
+
 		$data['jenisAll'] = $this->m_jenis->getAll();
+
+		$data['userdata'] = $this -> session -> userdata();
 		// print_r($data);
+		$this->load->view('layout/top');
 		$this->load->view('jenis/index', $data);
+		$this->load->view('layout/bottom');
 	}
 
 	public function add()
@@ -36,7 +53,9 @@ class Jenis extends CI_Controller
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
 			redirect(site_url('jenis'));
 		}
+		$this->load->view('layout/top');
 		$this->load->view('jenis/add', $data);
+		$this->load->view('layout/bottom');
 		// $this->load->view('jenis/add');
 	}
 
@@ -61,7 +80,11 @@ class Jenis extends CI_Controller
 		// print_r($data);
 
 		// $this->load->vars($data);
+		$this->load->view('layout/top');
 		$this->load->view('jenis/edit', $data);
+		// $this->load->view('jenis/add', $data);
+		$this->load->view('layout/bottom');
+		// $this->load->view('jenis/add');
 		// $this->load->view('jenis/edit', $data_array);
 	}
 
@@ -90,7 +113,11 @@ class Jenis extends CI_Controller
 		$data['baris'] = $this->m_jenis->getJenisAll($id);
 
 		$data['data'] = $data;
+		$this->load->view('layout/top');
 		$this->load->view('jenis/detail', $data);
+		$this->load->view('layout/bottom');
+
+		
 	}
 
 

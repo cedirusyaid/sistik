@@ -43,6 +43,7 @@ class m_baris extends CI_Model
 				on C.baris_induk = A.baris_id
 
 			WHERE A.jenis_id = '$jenis_id' OR C.jenis_id = '$jenis_id' 
+			ORDER BY A.baris_id ASC
 
 		");
 		return $query->result();

@@ -1,10 +1,4 @@
-<?php
-$this->load->view('layout/header');
 
-$this->load->view('layout/sidebar.php');
-
-
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -65,7 +59,6 @@ $this->load->view('layout/sidebar.php');
 
 
 
-<?php $this->load->view('layout/footer'); ?>
 
 <script>
 	$(document).ready(function() {
