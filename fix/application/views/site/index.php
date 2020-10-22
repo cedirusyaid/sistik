@@ -1,3 +1,4 @@
+
 <?php
 $this->load->model('m_tabel');
 $this->load->model('m_baris');
@@ -46,10 +47,12 @@ $this->load->model('m_isi');
 									foreach ($tabel as $tbl) : 
 										// print_r($tbl);				                  			
 
-										?>
+										if(isset($tbl['tahun_max']) AND $tbl['tahun_max'] > 0): ?>
+
 										<li data-target="#caroTbl" data-slide-to="<?=$nmr?>" <?php if ($nmr==0) {echo "class='active'";}?>></li>
 										<?php 
 										$nmr++;
+										endif;
 									endforeach; 
 									?>
 								</ol>
@@ -58,6 +61,9 @@ $this->load->model('m_isi');
 									<?php 
 									$nmr=0;
 									foreach ($tabel as $tbl) : 
+
+										if(isset($tbl['tahun_max']) AND $tbl['tahun_max'] > 0):
+
 
 
 										$detail = $this->m_tabel->getById($tbl['tabel_id']);
@@ -69,6 +75,7 @@ $this->load->model('m_isi');
 											<div class="row">
 												<div class="col-12">
 													<h3 class="text-center"><?=$tbl['tabel_nm'];?></h3>
+													<h5 class="text-center">Tahun <?=$tbl['tahun_max'];?></h5>
 												</div>
 
 											</div>
@@ -114,7 +121,7 @@ $this->load->model('m_isi');
 																			<td class="text-left"><?=$b1->baris_nm?></td>
 																			<?php
 																			foreach ($kolom as $klm) :
-																				$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $b1->baris_id, $tahun);
+																				$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $b1->baris_id, $tbl['tahun_max']);
 																				if (isset($isi)) {
 																					$value = $isi->isi_value;
 																				} else {
@@ -155,7 +162,7 @@ $this->load->model('m_isi');
 																		<td class="text-left"><li><?=$b2->baris_nm?></li></td>
 																		<?php
 																		foreach ($kolom as $klm) :
-																			$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $b2->baris_id, $tahun);
+																			$isi = $this->m_isi->isi_value($tabel_id, $klm->kolom_id, $b2->baris_id, $tbl['tahun_max']);
 																			if (isset($isi)) {
 																				$value = $isi->isi_value;
 																			} else {
@@ -204,6 +211,7 @@ $this->load->model('m_isi');
 
 						<?php 
 						$nmr++;
+					endif;
 					endforeach; 
 					?>
 
