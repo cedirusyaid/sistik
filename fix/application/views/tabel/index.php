@@ -54,6 +54,7 @@
 										// print_r($data)
 
 										if($kategori_bf !== $data['kategori_id']) :
+										$no=1;
 									?>
 										<tr> 
 											<td colspan="3"  class="bg-gray"><?= $data['kategori_nama']; ?></td>

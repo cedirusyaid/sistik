@@ -41,6 +41,7 @@
 			</form>
 		</div>
 		</div>
+		</div>
 		<?php
 		// echo  SITE_API.'user_auth/?username='.'&password=';
 

@@ -28,6 +28,11 @@ class m_tabel extends CI_Model
 				'field' => 'jenis_id',
 				'label' => 'jenis_id',
 				'rules' => 'required'
+			],
+			[
+				'field' => 'kategori_id',
+				'label' => 'kategori_id',
+				'rules' => ''
 			]
 ,
 			[
@@ -48,19 +53,34 @@ class m_tabel extends CI_Model
 	{
 
 
-			
 			$query  = $this->db->query("
-			SELECT A.*, B.*, C.*
+			SELECT A.*, B.*, C.*,(SELECT max(E.tahun) FROM isi_data E WHERE A.tabel_id = E.tabel_id) as tahun_max
 			FROM tabel_data A
 			LEFT JOIN jenis_data B
 			ON A.jenis_id = B.jenis_id
 			LEFT JOIN kategori_data C
 			ON A.kategori_id = C.kategori_id
-			WHERE A.deleted IS NULL
+			 WHERE A.deleted IS NULL
 			ORDER BY A.kategori_id ASC, A.tabel_nm ASC
 			");
 
 			return $query->result_array();
+
+
+
+			
+			// $query  = $this->db->query("
+			// SELECT A.*, B.*, C.*
+			// FROM tabel_data A
+			// LEFT JOIN jenis_data B
+			// ON A.jenis_id = B.jenis_id
+			// LEFT JOIN kategori_data C
+			// ON A.kategori_id = C.kategori_id
+			// WHERE A.deleted IS NULL
+			// ORDER BY A.kategori_id ASC, A.tabel_nm ASC
+			// ");
+
+			// return $query->result_array();
 
 		// return $this->db->get($this->_table)->result_array();
 	}

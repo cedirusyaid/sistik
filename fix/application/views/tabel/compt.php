@@ -32,7 +32,7 @@ $this->load->model('m_tabel');
 			<div class="row">
 
 				<!-- Baris -->
-				<div class="col-md-6 col-sm-12" >
+				<div class="col-md-4 col-sm-12" >
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">Jenis Data</h3>
@@ -104,7 +104,7 @@ $this->load->model('m_tabel');
 				</div>
 
 				<!-- Kolom -->
-				<div class="col-md-6  col-sm-12">
+				<div class="col-md-8  col-sm-12">
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">Kolom Data</h3>
@@ -118,6 +118,7 @@ $this->load->model('m_tabel');
 									<tr>
 										<th class="text-center">No.</th>
 										<th class="text-center">Kolom</th>
+										<th class="text-center">Satuan</th>
 										<th class="text-center">Tipe</th>
 										<th class="text-center">Aksi</th>
 									</tr>
@@ -131,6 +132,7 @@ $this->load->model('m_tabel');
 										<tr>
 											<td scope="row"><?= $no; ?>.</td>
 											<td><?= $data->kolom_nm; ?></td>
+											<td><?= $data->kolom_sat; ?></td>
 											<td><?= $data->kolom_tipe; ?></td>
 											<td>
 												<button data-toggle="modal" class="btn btn-info btn-sm btn-edit-kolom" data-id="<?= $data->kolom_id; ?>" data-name="<?= $data->kolom_nm; ?>" data-tipe="<?= $data->kolom_tipe ?>"><i class="fas fa-edit"></i></button> |
@@ -176,11 +178,15 @@ $this->load->model('m_tabel');
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Kolom</label>
-						<input type="text" class="form-control" name="kolom_nm" placeholder="Nama Kolom">
+						<input type="text" class="form-control" name="kolom_nm" placeholder="Nama Kolom" required>
+					</div>
+					<div class="form-group">
+						<label>Satuan</label>
+						<input type="text" class="form-control" name="kolom_sat" placeholder="Satuan, misal : m, orang, unit, kg dll" >
 					</div>
 					<div class="form-group">
 						<label>Tipe Kolom</label> <br>
-						<label class="radio-inline"><input type="radio" name="kolom_tipe" value="1"> Angka </label>
+						<label class="radio-inline"><input type="radio" name="kolom_tipe" value="1" required=""> Angka </label>
 						<label class="radio-inline"><input type="radio" name="kolom_tipe" value="2"> Text </label>
 					</div>
 				</div>
@@ -208,7 +214,11 @@ $this->load->model('m_tabel');
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Kolom</label>
-						<input type="text" class="form-control kolom_nm" name="kolom_nm">
+						<input type="text" class="form-control" name="kolom_nm">
+					</div>
+					<div class="form-group">
+						<label>Nama Kolom</label>
+						<input type="text" class="form-control" name="kolom_sat">
 					</div>
 					<div class="form-group">
 						<label>Tipe Kolom</label> <br>

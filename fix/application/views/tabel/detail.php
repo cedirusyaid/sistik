@@ -5,15 +5,15 @@
 	<section class="content-header">
 		<div class="container-fluid">
 			<div class="row mb-2">
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<h1><?= $detail['tabel_nm']; ?></h1>
 				</div>
-				<div class="col-sm-6">
+<!-- 				<div class="col-sm-3">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="<?=base_url()?>">Home</a></li>
 						<li class="breadcrumb-item active">Tabel</li>
 					</ol>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<!-- /.container-fluid -->
@@ -32,10 +32,10 @@
 
 						</div> -->
 						<div class="card-header">
-							<div class="row">
+							<div class="row form-group">
 
-								<div class=" col-md-2">Tahun </div>
-								<select class="col-md-2 col-sm-4 form-control" name="" id="" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
+								<label class=" col-form-label col-sm-2">Tahun </label>
+								<select class="col-sm-2 form-control" name="" id="" onchange="window.open(this.options[this.selectedIndex].value,'_top')">
 									<?php
 									for ($i = 2015; $i <= date('Y'); $i++) { ?>
 										<option value="<?= base_url('tabel/detail/' . $tabel_id . "/" . $i.'?edit='.$edit) ?>" <?php
@@ -49,7 +49,7 @@
 								?>
 								</select>
 							
-								<div class="col-md-8">
+								<div class="col-md-8 ">
 									<?php
 										if ($edit != 1) {
 											?>
@@ -67,9 +67,9 @@
 									?>
 								</div>
 							</div>
-							<div class="row">
-								<div class=" col-md-2">Kategori </div>
-								<div class=" col-md-2"><?=$detail['kategori_nama'];?> </div>
+							<div class="row form-group">
+								<label class=" col-md-2  col-form-label">Kategori </label>
+								<div class=" col-md-10"><?=$detail['kategori_nama'];?> </div>
 							</div>
 					</div>
 
@@ -95,14 +95,20 @@
 								<table id="" class="table table-bordered table-striped">
 									<thead>
 										<tr class="bg-green">
-											<th width="5%" class="text-center">No</th>
-											<th class="text-center"><?=$tabel['jenis_nm']?></th>
+											<th width="5%" class="text-center align-middle" >No</th>
+											<th class="text-center align-middle"><?=$tabel['jenis_nm']?></th>
 											<?php
 											$no = 0;
 											foreach ($kolom as $data) :
 												$no++;
 												?>
-												<th class="text-center"><?= $data->kolom_nm ?></th>
+												<th class="text-center align-middle" ><?= $data->kolom_nm ?>
+													<?php
+													if(isset($data->kolom_sat) AND strlen($data->kolom_sat)>0):
+														echo br()."(".$data->kolom_sat.")";
+													endif;
+													?>
+												</th>
 											<?php endforeach ?>
 										</tr>
 									</thead>
